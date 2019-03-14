@@ -3,6 +3,7 @@ public class instrument{
 	
 	public instrument (String nom){
 		this.nom=nom;
+		System.out.println("Coucou");
 		}
 
     public instrument() {
