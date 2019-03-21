@@ -1,20 +1,22 @@
+import sun.util.locale.provider.FallbackLocaleProviderAdapter;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 
 /* A faire :
-* - ajouter JMenu
-* - le reste
+* - les panels principaux avec tout le reste
 * */
 
 public class FenetrePrinc extends JFrame implements ActionListener{
 
-    protected int x=200, y=50, width = 800, height = 600;    // modifiables via options ?
+    protected int instruSelec=0, x=200, y=50, width = 800, height = 600, instruWidth, instruHeight;    // modifiables via options
     protected JMenuBar menuBar;
     protected JMenu menuIntruments, menuOptions, submenuResolution;
     protected JMenuItem itemFluteDePan, itemFluteABec, itemClarinette, reso1000_600, reso600_400;
+    protected PanelIntrument panelInstru;
+    protected JPanel mainPanel;
 
     public FenetrePrinc() {
         super("Simulateur d'instruments à vent");
@@ -23,9 +25,25 @@ public class FenetrePrinc extends JFrame implements ActionListener{
 
     private void init(){
 
+        // fenetre
         this.setBounds(x,y,width,height);
+        this.instruWidth = 2*width/3;
+        this.instruHeight = 2*height/3;
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setResizable(false);
 
+        // panels
+        this.panelInstru = new PanelIntrument();
+        panelInstru.setBounds(0,0, instruWidth, instruHeight);
+        this.mainPanel = new JPanel();
+        this.mainPanel.setLayout(null);
+        this.mainPanel.setBounds(0,0,width,height);
+        this.mainPanel.add(this.panelInstru);
+        this.setContentPane(this.mainPanel);
+
+        this.setInstruSelec(0);
+
+        // barre de menu
         this.menuBar();
 
         this.setVisible(true);
@@ -48,13 +66,18 @@ public class FenetrePrinc extends JFrame implements ActionListener{
         menuIntruments.add(itemFluteDePan);
         itemFluteDePan.addActionListener(this);
 
-        menuIntruments.addSeparator();      // pour séparer vents & cordes ?
-
         // flute a bec
         itemFluteABec = new JMenuItem("Flûte à bec");
         itemFluteABec.getAccessibleContext().setAccessibleDescription("Flûte à bec pas encore dispo");
         menuIntruments.add(itemFluteABec);
         itemFluteABec.addActionListener(this);
+
+        menuIntruments.addSeparator();      // pour séparer vents & cordes ?
+
+        // clarinette
+        itemClarinette = new JMenuItem("Clarinette");
+        menuIntruments.add(itemClarinette);
+        itemClarinette.addActionListener(this);
 
 
         // options
@@ -81,10 +104,19 @@ public class FenetrePrinc extends JFrame implements ActionListener{
 
         if (source == this.itemFluteABec){
             System.out.println("Flûte à bec");
+            this.setInstruSelec(Constants.FLUTEABEC);
+
         }
 
         else if (source == this.itemFluteDePan){
             System.out.println("Flûte de pan");
+            this.setInstruSelec(Constants.FLUTEDEPAN);
+
+        }
+
+        else if (source == this.itemClarinette){
+            System.out.println("Clarinette");
+            this.setInstruSelec(Constants.CLARINETTE);
         }
 
         else if (source ==this.reso600_400){
@@ -103,7 +135,18 @@ public class FenetrePrinc extends JFrame implements ActionListener{
     private void setDim(int width, int height){
         this.width = width;
         this.height = height;
+        this.instruWidth = 2*width/3;
+        this.instruHeight = 2*height/3;
+        this.panelInstru.setDim(instruWidth, instruHeight);
+        this.mainPanel.setBounds(0,0, width, height);
         this.setBounds(x, y, width, height);
-        System.out.println("SetDim done");
+//        System.out.println("SetDim done");
+    }
+
+    // pour que chaque composant ait le même instrument sélectionné, utiliser cette méthode
+    private void setInstruSelec(int instrument){
+        this.instruSelec = instrument;
+        this.panelInstru.setInstruSelec(instrument);
+        this.repaint();
     }
 }
