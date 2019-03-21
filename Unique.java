@@ -19,7 +19,7 @@ public class Unique extends JFrame{
 
 			setSize(width,height);
 			setTitle(title);
-			setLocation(1200,500);
+			setLocation(1130,500);
 
 //===========================================================================================================================
 //	Add Label

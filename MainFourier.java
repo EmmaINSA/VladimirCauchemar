@@ -3,8 +3,8 @@
 //===========================================================================================================================
 
 
-// Cette classe contient tout les éléments graphiques permettant de représenter un signal en fonction du temps
-// Elle est de type JPanel et prend en entrée un objet de type synthesisFunction ou simpleFunction (se réferrer à instrument.java)
+// Cette classe contient tout les éléments graphiques permettant de représenter le transforme de Fourier
+// Elle est de type 
 
 
 //===========================================================================================================================
@@ -28,15 +28,13 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class MainPanel extends JPanel {
+public class MainFourier extends JPanel {
 
 //===========================================================================================================================
 // Constructeur
 //===========================================================================================================================
 
-public MainPanel(String instrument, double frequence, String type) {
-
-    int nbPoint = (int)(2500000/frequence);
+public MainFourier(String instrument, double frequence) {
 
     instrument instru = new instrument(instrument);
 
@@ -44,39 +42,22 @@ public MainPanel(String instrument, double frequence, String type) {
 
     String rang = 1+"";
 
-    if(type == "synthesis"){    
-        for (int k = 0; k<nbPoint; k++){
-        plot.add(instru.synthesisFunction(frequence,k));
+        for (int k = 0; k<15; k++){
+        plot.add(instru.amplitudeTable.get(k));
         }
-    }
-    else if(type == "unique"){        
-        for (int k = 0; k<nbPoint; k++){
-        plot.add(instru.simpleFunction(frequence,k,1));
-        }
-    }
-
-
-
 
     setLayout(new BorderLayout());
 
-    JLabel title = new JLabel("");
-
-    if (type == "synthesis") {
-        title = new JLabel("Signal obtenu par synthese");
-    }
-    else if (type == "unique") {
-        title = new JLabel("Signal harmonique de rang "+rang);
-    }
+    JLabel title = new JLabel("Analyse de Fourier");
 
     title.setFont(new Font("Arial", Font.BOLD, 25));
     title.setHorizontalAlignment(JLabel.CENTER);
 
     JPanel graphPanel = new GraphPanel(plot,frequence);
 
-    MainPanel.VerticalPanel vertPanel = new MainPanel.VerticalPanel();
+    MainFourier.VerticalPanel vertPanel = new MainFourier.VerticalPanel();
 
-    MainPanel.HorizontalPanel horiPanel = new MainPanel.HorizontalPanel();
+    MainFourier.HorizontalPanel horiPanel = new MainFourier.HorizontalPanel();
 
     add(title, BorderLayout.NORTH);
     add(horiPanel, BorderLayout.SOUTH);
@@ -143,7 +124,7 @@ class HorizontalPanel extends JPanel {
 
         Font font = new Font("Arial", Font.PLAIN, 15);
 
-        String string = "Temps (micro s)";
+        String string = "n-ieme harmonique";
 
         FontMetrics metrics = g.getFontMetrics(font);
         int width = metrics.stringWidth(string);
@@ -227,18 +208,18 @@ static class GraphPanel extends JPanel {
         // Grille et échelle en X
         //===========================================================================================================================
         
-        int graduation = (int)Math.round(25000/frequence);
+        int graduation = (int)Math.round(plot.size());
 
         for (int i = 0; i < graduation; i++) {
                 int x0 = i * (getWidth() - padding * 2 - labelPadding) / (graduation - 1) + padding + labelPadding;
                 int x1 = x0;
                 int y0 = getHeight() - padding - labelPadding;
                 int y1 = y0 - pointWidth;
-                if ((i % ((int) ((graduation / 10.0)) + 1)) == 0) {
+                if ((i % ((int) ((graduation / 20.0)) + 1)) == 0) {
                     g2.setColor(gridColor);
                     g2.drawLine(x0, getHeight() - padding - labelPadding - 1 - pointWidth, x1, padding);
                     g2.setColor(Color.BLACK);
-                    String xLabel = i*100 + "";
+                    String xLabel = i + "";
                     FontMetrics metrics = g2.getFontMetrics();
                     int labelWidth = metrics.stringWidth(xLabel);
                     g2.drawString(xLabel, x0 - labelWidth / 2, y0 + metrics.getHeight() + 3);
@@ -259,9 +240,8 @@ static class GraphPanel extends JPanel {
         for (int i = 0; i < graphPoints.size() - 1; i++) {
             int x1 = graphPoints.get(i).x;
             int y1 = graphPoints.get(i).y;
-            int x2 = graphPoints.get(i + 1).x;
-            int y2 = graphPoints.get(i + 1).y;
-            g2.drawLine(x1, y1, x2, y2);
+            int y0 = (int)(padding+(yScale*getMaxScore()));
+            g2.drawLine(x1, y1, x1, y0);
         }
 
         g2.setStroke(oldStroke);
