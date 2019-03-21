@@ -4,13 +4,13 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class PanelIntrument extends JPanel {
+public class PanelInstrument extends JPanel {
 
     private int instruSelec = 0, width, height;
     private Image bg = null;
     private Image[] bgs = {null, null, null};        // tableau de bgs à sélectionner
 
-    public PanelIntrument() {
+    public PanelInstrument() {
         this.init();
     }
 
@@ -29,7 +29,7 @@ public class PanelIntrument extends JPanel {
     public void setInstruSelec(int instrument) {
         this.instruSelec = instrument;
         try {
-            this.bg = this.bgs[instrument];
+            this.bg = this.bgs[this.instruSelec];
         }catch (IndexOutOfBoundsException e){
             System.out.println("Instrument pas encore dispo en bg");
         }
@@ -56,8 +56,10 @@ public class PanelIntrument extends JPanel {
     }
 
     public void setDim(int width, int height){
-        this.width = width;
-        this.height = height;
-        this.setBounds(0,0, this.width, this.height);
+        if (this.width != width && this.height != height) {
+            this.width = width;
+            this.height = height;
+            this.setBounds(0, 0, this.width, this.height);
+        }
     }
 }
