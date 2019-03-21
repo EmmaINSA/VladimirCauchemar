@@ -1,6 +1,11 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 
 /* A faire :
@@ -15,8 +20,9 @@ public class FenetrePrinc extends JFrame implements ActionListener{
 
     protected int instruSelec=0, x=200, y=50, width = 800, height = 600, instruWidth, instruHeight;    // modifiables via options
     protected JMenuBar menuBar;
-    protected JMenu menuInstruments, menuOptions, submenuResolution;
-    protected JMenuItem itemFluteDePan, itemFluteABec, itemClarinette, reso1000_600, reso600_400;
+    protected JMenu menuInstruments, menuOptions, submenuResolution, menuAbout;
+    protected JMenuItem itemFluteDePan, itemFluteABec, itemClarinette, itemHautbois, itemOrgue,
+            reso1000_600, reso600_400, itemInspi;
     protected PanelInstrument panelInstru;
     protected JPanel mainPanel;
 
@@ -64,13 +70,13 @@ public class FenetrePrinc extends JFrame implements ActionListener{
         // flute de pan
         itemFluteDePan = new JMenuItem("Flûte de pan"); // autre argument : KeyEvent.VK_P par ex
         //itemFluteDePan.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));      // raccourci clavier ?
-        itemFluteDePan.getAccessibleContext().setAccessibleDescription("Flûte de pan pas encore dispo");
+//        itemFluteDePan.getAccessibleContext().setAccessibleDescription("Flûte de pan pas encore dispo");
         menuInstruments.add(itemFluteDePan);
         itemFluteDePan.addActionListener(this);
 
         // flute a bec
         itemFluteABec = new JMenuItem("Flûte à bec");
-        itemFluteABec.getAccessibleContext().setAccessibleDescription("Flûte à bec pas encore dispo");
+//        itemFluteABec.getAccessibleContext().setAccessibleDescription("Flûte à bec pas encore dispo");
         menuInstruments.add(itemFluteABec);
         itemFluteABec.addActionListener(this);
 
@@ -81,6 +87,15 @@ public class FenetrePrinc extends JFrame implements ActionListener{
         menuInstruments.add(itemClarinette);
         itemClarinette.addActionListener(this);
 
+        // hautbois
+        itemHautbois = new JMenuItem("Hautbois");
+        menuInstruments.add(itemHautbois);
+        itemHautbois.addActionListener(this);
+
+        // orgue
+        itemOrgue = new JMenuItem("Orgue");
+        menuInstruments.add(itemOrgue);
+        itemOrgue.addActionListener(this);
 
         // options
         menuOptions = new JMenu("Options");
@@ -95,6 +110,13 @@ public class FenetrePrinc extends JFrame implements ActionListener{
         reso1000_600.addActionListener(this);
         reso600_400.addActionListener(this);
         menuOptions.add(submenuResolution);
+
+        // autres
+        menuAbout = new JMenu("About");
+        itemInspi = new JMenuItem("Inspiration");
+        itemInspi.addActionListener(this);
+        menuAbout.add(itemInspi);
+        menuBar.add(menuAbout);
 
         this.setJMenuBar(menuBar);
 
@@ -121,12 +143,32 @@ public class FenetrePrinc extends JFrame implements ActionListener{
             this.setInstruSelec(Constants.CLARINETTE);
         }
 
+        else if (source == this.itemHautbois){
+            System.out.println("Hautbois");
+            this.setInstruSelec(Constants.HAUTBOIS);
+        }
+
+        else if (source == this.itemOrgue){
+            System.out.println("Orgue");
+            this.setInstruSelec(Constants.ORGUE);
+        }
+
         else if (source ==this.reso600_400){
             this.setDim(600,400);
         }
 
         else if (source == this.reso1000_600){
             this.setDim(1000,600);
+        }
+
+        else if (source == this.itemInspi){
+            try {
+                java.awt.Desktop.getDesktop().browse(new URI("https://youtu.be/hpjV962DLWs"));
+            }catch (URISyntaxException e2){
+                e2.printStackTrace();
+            }catch (IOException e1){
+                e1.printStackTrace();
+            }
         }
 
         else{
