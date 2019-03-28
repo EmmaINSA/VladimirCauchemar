@@ -196,9 +196,13 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_Q) {
                
                 try {
-                       player.play("I[Pan_Flute] C5h");//do5
+                       player.play("I[Flute] C5h");//do5
                        fi=i.f[0];
-                       //i.synthesisFunction(fi, 0.5);
+                       String instrument = "flute";
+               		   double frequence = fi;
+               		   Synthesis s = new Synthesis (instrument, frequence);
+               		   Unique u = new Unique (instrument, frequence);
+               		   Analysis a = new Analysis (instrument, frequence);
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
