@@ -196,13 +196,9 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_Q) {
                
                 try {
-                       player.play("I[Flute] C5h");//do5
+                       player.play("I[Pan_Flute] C5h");//do5
                        fi=i.f[0];
-                       String instrument = "flute";
-               		   double frequence = fi;
-               		   Synthesis s = new Synthesis (instrument, frequence);
-               		   Unique u = new Unique (instrument, frequence);
-               		   Analysis a = new Analysis (instrument, frequence);
+                       //i.synthesisFunction(fi, 0.5);
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -210,7 +206,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_W) {
                 
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] C5h");//ri5
+                       player.play("I[Flute] C5h");//ri5
                        fi=i.f[1];
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -219,7 +215,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_E) {
                 
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] C5h");//mi5
+                       player.play("I[Clarinet] C5h");//mi5
                        fi=i.f[2];
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -228,7 +224,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_R) {
                
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] F5h");//fa5
+                       player.play("I[Flute] F5h");//fa5
                        fi=i.f[3];
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -237,7 +233,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_T) {
                 
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] G5h");//sol5
+                       player.play("I[Flute] G5h");//sol5
                        fi=i.f[4];
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -246,7 +242,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_Y) {
                
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] A5h");//la5
+                       player.play("I[Flute] A5h");//la5
                        fi=i.f[5];
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -255,7 +251,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_U) {
                 
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] B5h");//xi5
+                       player.play("I[Flute] B5h");//xi5
                        fi=i.f[6];
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -264,7 +260,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_A) {
                
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] C6h");//do6
+                       player.play("I[Flute] C6h");//do6
                        fi=i.f[7];
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -273,7 +269,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_S) {
                
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] D6h");//re6
+                       player.play("I[Flute] D6h");//re6
                        fi=i.f[8];
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -282,7 +278,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_D) {
                 
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] E6h");//mi6
+                       player.play("I[Flute] E6h");//mi6
                        fi=i.f[9];
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -291,7 +287,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_F) {
                 
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] F6h");//fa6
+                       player.play("I[Flute] F6h");//fa6
                        fi=i.f[10];
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -300,7 +296,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_G) {
                
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] G6h");//sol6
+                       player.play("I[Flute] G6h");//sol6
                        fi=i.f[11];
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -309,7 +305,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_H) {
                 
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] A6h");//la6
+                       player.play("I[Flute] A6h");//la6
                        fi=i.f[12];
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -318,7 +314,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_J) {
                
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] B6h");//xi6
+                       player.play("I[Flute] B6h");//xi6
                        fi=i.f[13];
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
