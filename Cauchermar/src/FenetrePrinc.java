@@ -31,7 +31,6 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
     protected PanelInstrument panelInstru;
     protected JPanel mainPanel;
     protected JCheckBox AfficherGraphe;
-
     public FenetrePrinc() {
         super("Simulateur d'instruments à vent");
         init();
@@ -107,11 +106,11 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         // options
         menuOptions = new JMenu("Options");
         menuBar.add(menuOptions);
-        // Afficher les Graphes
+
         AfficherGraphe = new JCheckBox("Afficher les Graphes");
         menuOptions.add(AfficherGraphe);
         AfficherGraphe.addActionListener(this);
-
+        
         // résolution
         submenuResolution = new JMenu("Résolution");
         reso600_400 = new JMenuItem("600x400");
@@ -193,7 +192,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
             
     }
 
-    
+   
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
 		Player player = new Player();
@@ -201,18 +200,14 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_Q) {
                
                 try {
-                       player.play("I[Flute] C5h");//do5
-                       fi=i.f[0];
-<<<<<<< HEAD
-                       if(AfficherGraphe.isSelected()){}
-                       //i.synthesisFunction(fi, 0.5);
-=======
-                       String instrument = "flute";
-               		   double frequence = fi;
-               		   Synthesis s = new Synthesis (instrument, frequence);
-               		   Unique u = new Unique (instrument, frequence);
-               		   Analysis a = new Analysis (instrument, frequence);
->>>>>>> parent of 3dcc817... Update FenetrePrinc.java
+                	   player.play("I["+Constants.STRINGS[instruSelec]+"] C5..");//do5
+                       String instrument = Constants.STRINGS[instruSelec];
+               		   double frequence =i.f[0];
+               		if(AfficherGraphe.isSelected()){
+                		Synthesis s = new Synthesis (instrument, frequence);
+                		Unique u = new Unique (instrument, frequence);
+                		Analysis a = new Analysis (instrument, frequence);
+                		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -220,9 +215,14 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_W) {
                 
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] C5h");//ri5
-                       fi=i.f[1];
-                    if(AfficherGraphe.isSelected()){}
+                	 player.play("I["+Constants.STRINGS[instruSelec]+"] D5h");//ri5
+                     String instrument = Constants.STRINGS[instruSelec];
+             		 double frequence =i.f[1];
+             		if(AfficherGraphe.isSelected()){
+                		Synthesis s = new Synthesis (instrument, frequence);
+                		Unique u = new Unique (instrument, frequence);
+                		Analysis a = new Analysis (instrument, frequence);
+                		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -230,9 +230,14 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_E) {
                 
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] C5h");//mi5
-                       fi=i.f[2];
-                    if(AfficherGraphe.isSelected()){}
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] E5h");//ri5
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[2];
+            		if(AfficherGraphe.isSelected()){
+                		Synthesis s = new Synthesis (instrument, frequence);
+                		Unique u = new Unique (instrument, frequence);
+                		Analysis a = new Analysis (instrument, frequence);
+                		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -240,9 +245,14 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_R) {
                
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] F5h");//fa5
-                       fi=i.f[3];
-                    if(AfficherGraphe.isSelected()){}
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] F5h");//ri5
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[3];
+            		if(AfficherGraphe.isSelected()){
+                		Synthesis s = new Synthesis (instrument, frequence);
+                		Unique u = new Unique (instrument, frequence);
+                		Analysis a = new Analysis (instrument, frequence);
+                		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -250,9 +260,14 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_T) {
                 
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] G5h");//sol5
-                       fi=i.f[4];
-                    if(AfficherGraphe.isSelected()){}
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] G5h");//ri5
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[4];
+            		if(AfficherGraphe.isSelected()){
+                		Synthesis s = new Synthesis (instrument, frequence);
+                		Unique u = new Unique (instrument, frequence);
+                		Analysis a = new Analysis (instrument, frequence);
+                		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -260,9 +275,14 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_Y) {
                
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] A5h");//la5
-                       fi=i.f[5];
-                    if(AfficherGraphe.isSelected()){}
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] A5h");//ri5
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[5];
+            		if(AfficherGraphe.isSelected()){
+                		Synthesis s = new Synthesis (instrument, frequence);
+                		Unique u = new Unique (instrument, frequence);
+                		Analysis a = new Analysis (instrument, frequence);
+                		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -270,9 +290,14 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_U) {
                 
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] B5h");//xi5
-                       fi=i.f[6];
-                    if(AfficherGraphe.isSelected()){}
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] B5h");//ri5
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[6];
+            		if(AfficherGraphe.isSelected()){
+                		Synthesis s = new Synthesis (instrument, frequence);
+                		Unique u = new Unique (instrument, frequence);
+                		Analysis a = new Analysis (instrument, frequence);
+                		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -280,9 +305,14 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_A) {
                
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] C6h");//do6
-                       fi=i.f[7];
-                    if(AfficherGraphe.isSelected()){}
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] C6h");//ri5
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[7];
+            		if(AfficherGraphe.isSelected()){
+                		Synthesis s = new Synthesis (instrument, frequence);
+                		Unique u = new Unique (instrument, frequence);
+                		Analysis a = new Analysis (instrument, frequence);
+                		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -290,9 +320,15 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_S) {
                
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] D6h");//re6
-                       fi=i.f[8];
-                    if(AfficherGraphe.isSelected()){}
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] D6h");//ri5
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[8];
+            		if(AfficherGraphe.isSelected()){
+            		Synthesis s = new Synthesis (instrument, frequence);
+            		Unique u = new Unique (instrument, frequence);
+            		Analysis a = new Analysis (instrument, frequence);
+            		}
+                    
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -300,9 +336,14 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_D) {
                 
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] E6h");//mi6
-                       fi=i.f[9];
-                    if(AfficherGraphe.isSelected()){}
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] E6h");//ri5
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[9];
+            		if(AfficherGraphe.isSelected()){
+                		Synthesis s = new Synthesis (instrument, frequence);
+                		Unique u = new Unique (instrument, frequence);
+                		Analysis a = new Analysis (instrument, frequence);
+                		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -310,9 +351,14 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_F) {
                 
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] F6h");//fa6
-                       fi=i.f[10];
-                    if(AfficherGraphe.isSelected()){}
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] F6h");//ri5
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[10];
+            		if(AfficherGraphe.isSelected()){
+                		Synthesis s = new Synthesis (instrument, frequence);
+                		Unique u = new Unique (instrument, frequence);
+                		Analysis a = new Analysis (instrument, frequence);
+                		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -320,9 +366,14 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_G) {
                
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] G6h");//sol6
-                       fi=i.f[11];
-                    if(AfficherGraphe.isSelected()){}
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] G6h");//ri5
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[11];
+            		if(AfficherGraphe.isSelected()){
+                		Synthesis s = new Synthesis (instrument, frequence);
+                		Unique u = new Unique (instrument, frequence);
+                		Analysis a = new Analysis (instrument, frequence);
+                		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -330,9 +381,14 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_H) {
                 
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] A6h");//la6
-                       fi=i.f[12];
-                    if(AfficherGraphe.isSelected()){}
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] A6h");//ri5
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[12];
+            		if(AfficherGraphe.isSelected()){
+                		Synthesis s = new Synthesis (instrument, frequence);
+                		Unique u = new Unique (instrument, frequence);
+                		Analysis a = new Analysis (instrument, frequence);
+                		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -340,9 +396,14 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         if (keyCode == KeyEvent.VK_J) {
                
                 try {
-                       player.play("I["+Constants.STRINGS[instruSelec]+"] B6h");//xi6
-                       fi=i.f[13];
-                    if(AfficherGraphe.isSelected()){}
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] B6h");//ri5
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[13];
+            		if(AfficherGraphe.isSelected()){
+                		Synthesis s = new Synthesis (instrument, frequence);
+                		Unique u = new Unique (instrument, frequence);
+                		Analysis a = new Analysis (instrument, frequence);
+                		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
