@@ -30,6 +30,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
             reso1000_600, reso600_400, itemInspi;
     protected PanelInstrument panelInstru;
     protected JPanel mainPanel;
+    protected JCheckBox AfficherGraphe;
 
     public FenetrePrinc() {
         super("Simulateur d'instruments à vent");
@@ -106,6 +107,10 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         // options
         menuOptions = new JMenu("Options");
         menuBar.add(menuOptions);
+        // Afficher les Graphes
+        AfficherGraphe = new JCheckBox("Afficher les Graphes");
+        menuOptions.add(AfficherGraphe);
+        AfficherGraphe.addActionListener(this);
 
         // résolution
         submenuResolution = new JMenu("Résolution");
@@ -198,6 +203,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
                 try {
                        player.play("I[Pan_Flute] C5h");//do5
                        fi=i.f[0];
+                       if(AfficherGraphe.isSelected()){}
                        //i.synthesisFunction(fi, 0.5);
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -208,6 +214,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
                 try {
                        player.play("I[Flute] C5h");//ri5
                        fi=i.f[1];
+                    if(AfficherGraphe.isSelected()){}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -217,6 +224,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
                 try {
                        player.play("I[Clarinet] C5h");//mi5
                        fi=i.f[2];
+                    if(AfficherGraphe.isSelected()){}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -226,6 +234,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
                 try {
                        player.play("I[Flute] F5h");//fa5
                        fi=i.f[3];
+                    if(AfficherGraphe.isSelected()){}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -235,6 +244,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
                 try {
                        player.play("I[Flute] G5h");//sol5
                        fi=i.f[4];
+                    if(AfficherGraphe.isSelected()){}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -244,6 +254,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
                 try {
                        player.play("I[Flute] A5h");//la5
                        fi=i.f[5];
+                    if(AfficherGraphe.isSelected()){}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -253,6 +264,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
                 try {
                        player.play("I[Flute] B5h");//xi5
                        fi=i.f[6];
+                    if(AfficherGraphe.isSelected()){}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -262,6 +274,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
                 try {
                        player.play("I[Flute] C6h");//do6
                        fi=i.f[7];
+                    if(AfficherGraphe.isSelected()){}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -271,6 +284,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
                 try {
                        player.play("I[Flute] D6h");//re6
                        fi=i.f[8];
+                    if(AfficherGraphe.isSelected()){}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -280,6 +294,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
                 try {
                        player.play("I[Flute] E6h");//mi6
                        fi=i.f[9];
+                    if(AfficherGraphe.isSelected()){}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -289,6 +304,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
                 try {
                        player.play("I[Flute] F6h");//fa6
                        fi=i.f[10];
+                    if(AfficherGraphe.isSelected()){}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -298,6 +314,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
                 try {
                        player.play("I[Flute] G6h");//sol6
                        fi=i.f[11];
+                    if(AfficherGraphe.isSelected()){}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -307,6 +324,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
                 try {
                        player.play("I[Flute] A6h");//la6
                        fi=i.f[12];
+                    if(AfficherGraphe.isSelected()){}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -316,6 +334,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
                 try {
                        player.play("I[Flute] B6h");//xi6
                        fi=i.f[13];
+                    if(AfficherGraphe.isSelected()){}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
