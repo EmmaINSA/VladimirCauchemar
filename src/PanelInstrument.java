@@ -27,6 +27,7 @@ public class PanelInstrument extends JPanel {
         }catch (IOException e){
             e.printStackTrace();
         }
+        System.out.println(new File("Instrument Pics/flutevuedecoupe.jpg").canRead());
     }
 
     public void setInstruSelec(int instrument) {
