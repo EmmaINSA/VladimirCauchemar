@@ -482,12 +482,11 @@ public void keyPressed(KeyEvent e) {
         return SelectedElements;
     }
 
-        private void rendreVisible(){
-
+    private void rendreVisible(){
         s.setVisible(true);
         a.setVisible(true);
         u.setVisible(true);
-
+        this.setVisible(true);
     }
 
     private void rafraichir(String instrument, double frequence, LinkedList<Integer> harmoniques){
