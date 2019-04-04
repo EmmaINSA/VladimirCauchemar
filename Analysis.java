@@ -1,6 +1,5 @@
 import javax.swing.*;
-import java.awt.*;
-import java.util.*;
+import java.util.LinkedList;
 
 public class Analysis extends JFrame{
 		public Analysis(String instrument, double frequence){
@@ -19,7 +18,7 @@ public class Analysis extends JFrame{
 
 			setSize(width,height);
 			setTitle(title);
-			setLocation(90,500);
+			setLocation(610,500);
 
 //===========================================================================================================================
 //	Add Label

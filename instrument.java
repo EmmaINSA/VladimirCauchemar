@@ -3,9 +3,9 @@ import java.util.ArrayList;
 
 public class instrument{
 	String nom;
-    
+    double[] f;
     List<Double> amplitudeTable = new ArrayList<>();
-    //ce tableau contiendra les harmoniques avec leurs amplitudes pond√©r√©s
+    //ce tableau contiendra les harmoniques avec leurs amplitudes pond®¶r®¶s
     //les harmoniques sont obtenus par mutltiple de f fondamental
     double coeffAmplitude;
     //si besoin amplifier amplitudes selon instrument car tableau relatif a A0 = 1
@@ -33,8 +33,17 @@ public class instrument{
                 amplitudeTable.add(tempTable[j]);
                 }
             }
+            
+           f=new double[14];
+           double df=Math.pow(2,1/6);
+           f[0]=440;
+           for(int i=1;i<14;i++){
+			   f[i]=f[i-1]*df;
+			   }
 		}
-        
+    
+	
+	
         public double synthesisFunction (double frequence, double temps){
             
             double synthesisAmplitude = 0;

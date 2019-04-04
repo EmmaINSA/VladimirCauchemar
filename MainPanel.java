@@ -3,8 +3,8 @@
 //===========================================================================================================================
 
 
-// Cette classe contient tout les √©l√©ments graphiques permettant de repr√©senter un signal en fonction du temps
-// Elle est de type JPanel et prend en entr√©e un objet de type synthesisFunction ou simpleFunction (se r√©ferrer √† instrument.java)
+// Cette classe contient tout les ®¶l®¶ments graphiques permettant de repr®¶senter un signal en fonction du temps
+// Elle est de type JPanel et prend en entr®¶e un objet de type synthesisFunction ou simpleFunction (se r®¶ferrer ®§ instrument.java)
 
 
 //===========================================================================================================================
@@ -34,7 +34,7 @@ public class MainPanel extends JPanel {
 // Constructeur
 //===========================================================================================================================
 
-public MainPanel(String instrument, double frequence, String type) {
+public MainPanel(String instrument, double frequence) {
 
     int nbPoint = (int)(2500000/frequence);
 
@@ -43,31 +43,17 @@ public MainPanel(String instrument, double frequence, String type) {
     List<Double> plot = new ArrayList<>();
 
     String rang = 1+"";
-
-    if(type == "synthesis"){    
-        for (int k = 0; k<nbPoint; k++){
+ 
+    for (int k = 0; k<nbPoint; k++){
         plot.add(instru.synthesisFunction(frequence,k));
-        }
     }
-    else if(type == "unique"){        
-        for (int k = 0; k<nbPoint; k++){
-        plot.add(instru.simpleFunction(frequence,k,1));
-        }
-    }
-
-
-
 
     setLayout(new BorderLayout());
 
     JLabel title = new JLabel("");
 
-    if (type == "synthesis") {
-        title = new JLabel("Signal obtenu par synthese");
-    }
-    else if (type == "unique") {
-        title = new JLabel("Signal harmonique de rang "+rang);
-    }
+
+    title = new JLabel("Signal obtenu par synthese");
 
     title.setFont(new Font("Arial", Font.BOLD, 25));
     title.setHorizontalAlignment(JLabel.CENTER);
@@ -85,7 +71,7 @@ public MainPanel(String instrument, double frequence, String type) {
 }
 
 //===========================================================================================================================
-// Sous-panel pour l'axe des ordonn√©e
+// Sous-panel pour l'axe des ordonn®¶e
 //===========================================================================================================================
 
 class VerticalPanel extends JPanel {
@@ -103,7 +89,7 @@ class VerticalPanel extends JPanel {
 
         Font font = new Font("Arial", Font.PLAIN, 15);
 
-        String string = "Amplitude (mV)";
+        String string = "Amplitude (ua)";
 
         FontMetrics metrics = g.getFontMetrics(font);
         int width = metrics.stringWidth(string);
@@ -166,8 +152,7 @@ static class GraphPanel extends JPanel {
     private int heigth = 400;
     private int padding = 25;
     private int labelPadding = 25;
-    private Color lineColor = new Color(44, 102, 230, 180);
-    private Color pointColor = new Color(100, 100, 100, 180);
+    private Color lineColor = new Color(0,0,0);
     private Color gridColor = new Color(200, 200, 200, 200);
     private static final Stroke GRAPH_STROKE = new BasicStroke(2f);
     private int pointWidth = 4;
@@ -204,7 +189,7 @@ static class GraphPanel extends JPanel {
         g2.setColor(Color.BLACK);
 
         //===========================================================================================================================
-        // Grille et √©chelle en Y
+        // Grille et ®¶chelle en Y
         //===========================================================================================================================
         for (int i = 0; i < numberYDivisions + 1; i++) {
             int x0 = padding + labelPadding;
@@ -224,7 +209,7 @@ static class GraphPanel extends JPanel {
         }
 
         //===========================================================================================================================
-        // Grille et √©chelle en X
+        // Grille et ®¶chelle en X
         //===========================================================================================================================
         
         int graduation = (int)Math.round(25000/frequence);
@@ -265,18 +250,11 @@ static class GraphPanel extends JPanel {
         }
 
         g2.setStroke(oldStroke);
-        g2.setColor(pointColor);
-        for (int i = 0; i < graphPoints.size(); i++) {
-            int x = graphPoints.get(i).x - pointWidth / 2;
-            int y = graphPoints.get(i).y - pointWidth / 2;
-            int ovalW = pointWidth;
-            int ovalH = pointWidth;
-            g2.fillOval(x, y, ovalW, ovalH);
-        }
+
     }
 
 //===========================================================================================================================
-// M√©thodes utiles
+// M®¶thodes utiles
 //===========================================================================================================================
 
     private double getMinScore() {

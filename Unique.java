@@ -1,9 +1,8 @@
 import javax.swing.*;
-import java.awt.*;
-import java.util.*;
+import java.util.LinkedList;
 
 public class Unique extends JFrame{
-		public Unique(String instrument, double frequence){
+		public Unique(String instrument, double frequence, LinkedList<Integer> harmoniques){
 
 //===========================================================================================================================
 // Just some variables
@@ -25,7 +24,7 @@ public class Unique extends JFrame{
 //	Add Label
 //===========================================================================================================================
 
-			MainPanel mp = new MainPanel(instrument, frequence, "unique");
+			MainPanel2 mp = new MainPanel2(instrument, frequence, harmoniques);
 			add(mp);
 
 //===========================================================================================================================
