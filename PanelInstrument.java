@@ -8,7 +8,7 @@ public class PanelInstrument extends JPanel {
 
     private int instruSelec = 0, width, height;
     private Image bg = null;
-    private Image[] bgs = {null, null, null, null, null};        // tableau de bgs ¨¤ s¨¦lectionner
+    private Image[] bgs = {null, null, null, null, null};        // tableau de bgs ¡§ s¡§lectionner
 
     public PanelInstrument() {
         this.init();
@@ -19,11 +19,11 @@ public class PanelInstrument extends JPanel {
 
         try {
             // a mettre dans le tableau bgs
-            this.bgs[Constants.FLUTEABEC] = ImageIO.read(new File("flutevuedecoupe.jpg"));
-            this.bgs[Constants.FLUTEDEPAN] = ImageIO.read(new File("flute de pan VueDeCoupe1.jpg"));
-            this.bgs[Constants.CLARINETTE] = ImageIO.read(new File("Clarinet.jpg"));
-            this.bgs[Constants.HAUTBOIS] = ImageIO.read(new File("Oboe2.jpg"));
-            this.bgs[Constants.ORGUE] = ImageIO.read(new File("Orgue1.jpg"));
+            this.bgs[Constants.FLUTEABEC] = ImageIO.read(new File("Instrument Pics/flutevuedecoupe.jpg"));
+            this.bgs[Constants.FLUTEDEPAN] = ImageIO.read(new File("Instrument Pics/flute de pan VueDeCoupe1.jpg"));
+            this.bgs[Constants.CLARINETTE] = ImageIO.read(new File("Instrument Pics/Clarinet.jpg"));
+            this.bgs[Constants.HAUTBOIS] = ImageIO.read(new File("Instrument Pics/Oboe2.jpg"));
+            this.bgs[Constants.ORGUE] = ImageIO.read(new File("Instrument Pics/Orgue1.jpg"));
         }catch (IOException e){
             e.printStackTrace();
         }

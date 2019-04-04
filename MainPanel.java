@@ -3,8 +3,8 @@
 //===========================================================================================================================
 
 
-// Cette classe contient tout les ¨¦l¨¦ments graphiques permettant de repr¨¦senter un signal en fonction du temps
-// Elle est de type JPanel et prend en entr¨¦e un objet de type synthesisFunction ou simpleFunction (se r¨¦ferrer ¨¤ instrument.java)
+// Cette classe contient tout les elements graphiques permettant de reprÂ¨Â¦senter un signal en fonction du temps
+// Elle est de type JPanel et prend en entrÂ¨Â¦e un objet de type synthesisFunction ou simpleFunction (se rÂ¨Â¦ferrer Â¨Â¤ instrument.java)
 
 
 //===========================================================================================================================
@@ -71,7 +71,7 @@ public MainPanel(String instrument, double frequence) {
 }
 
 //===========================================================================================================================
-// Sous-panel pour l'axe des ordonn¨¦e
+// Sous-panel pour l'axe des ordonnee
 //===========================================================================================================================
 
 class VerticalPanel extends JPanel {
@@ -189,7 +189,7 @@ static class GraphPanel extends JPanel {
         g2.setColor(Color.BLACK);
 
         //===========================================================================================================================
-        // Grille et ¨¦chelle en Y
+        // Grille et echelle en Y
         //===========================================================================================================================
         for (int i = 0; i < numberYDivisions + 1; i++) {
             int x0 = padding + labelPadding;
@@ -209,7 +209,7 @@ static class GraphPanel extends JPanel {
         }
 
         //===========================================================================================================================
-        // Grille et ¨¦chelle en X
+        // Grille et echelle en X
         //===========================================================================================================================
         
         int graduation = (int)Math.round(25000/frequence);
@@ -254,7 +254,7 @@ static class GraphPanel extends JPanel {
     }
 
 //===========================================================================================================================
-// M¨¦thodes utiles
+// Methodes utiles
 //===========================================================================================================================
 
     private double getMinScore() {

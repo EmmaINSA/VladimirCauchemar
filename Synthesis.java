@@ -1,7 +1,10 @@
 import javax.swing.*;
 
 public class Synthesis extends JFrame{
-		public Synthesis(String instrument, double frequence){
+
+	MainPanel mp;
+
+		public Synthesis(){
 
 //===========================================================================================================================
 // Just some variables
@@ -20,17 +23,14 @@ public class Synthesis extends JFrame{
 			setLocation(90,500);
 
 //===========================================================================================================================
-//	Add Label
-//===========================================================================================================================
-
-			MainPanel mp = new MainPanel(instrument, frequence);
-			add(mp);
-
-//===========================================================================================================================
 //	Set Visible
 //===========================================================================================================================
 
-			setVisible(true);
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		}
+
+		public void refresh(String instrument, double frequence){
+			mp = new MainPanel(instrument, frequence);
+			add(mp);
 		}
 }
