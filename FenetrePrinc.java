@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.LinkedList;
 import javax.swing.JCheckBox;
-
 import org.jfugue.player.Player;
 
 /* A faire :
@@ -240,7 +239,7 @@ public void keyPressed(KeyEvent e) {
                        String instrument = Constants.STRINGS[instruSelec];
                		   double frequence =i.f[0];
                		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, fi, harmoniquesChoisies);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
                 		}
                 } catch (Exception ex) {
@@ -254,7 +253,7 @@ public void keyPressed(KeyEvent e) {
                      String instrument = Constants.STRINGS[instruSelec];
              		 double frequence =i.f[1];
              		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, fi, harmoniquesChoisies);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
                 		}
                 } catch (Exception ex) {
@@ -264,11 +263,11 @@ public void keyPressed(KeyEvent e) {
         if (keyCode == KeyEvent.VK_E) {
                 
                 try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] E5q");
+                	// player.play("I["+Constants.STRINGS[instruSelec]+"] E5q");
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[2];
             		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, fi, harmoniquesChoisies);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
                 		}
                 } catch (Exception ex) {
@@ -278,11 +277,11 @@ public void keyPressed(KeyEvent e) {
         if (keyCode == KeyEvent.VK_R) {
                
                 try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] F5q");
+                	// player.play("I["+Constants.STRINGS[instruSelec]+"] F5q");
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[3];
             		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, fi, harmoniquesChoisies);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
                 		}
                 } catch (Exception ex) {
@@ -296,7 +295,7 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[4];
             		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, fi, harmoniquesChoisies);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
                 		}
                 } catch (Exception ex) {
@@ -310,7 +309,7 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[5];
             		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, fi, harmoniquesChoisies);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
                 		}
                 } catch (Exception ex) {
@@ -324,7 +323,7 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[6];
             		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, fi, harmoniquesChoisies);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
                 		}
                 } catch (Exception ex) {
@@ -338,7 +337,7 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[7];
             		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, fi, harmoniquesChoisies);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
                 		}
                 } catch (Exception ex) {
@@ -352,7 +351,7 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[8];
             		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, fi, harmoniquesChoisies);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
             		}
                     
@@ -367,7 +366,7 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[9];
             		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, fi, harmoniquesChoisies);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
                 		}
                 } catch (Exception ex) {
@@ -381,7 +380,7 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[10];
             		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, fi, harmoniquesChoisies);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
                 		}
                 } catch (Exception ex) {
@@ -395,7 +394,7 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[11];
             		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, fi, harmoniquesChoisies);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
                 		}
                 } catch (Exception ex) {
@@ -409,7 +408,7 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[12];
             		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, fi, harmoniquesChoisies);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
                 		}
                 } catch (Exception ex) {
@@ -423,7 +422,7 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[13];
             		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, fi, harmoniquesChoisies);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
                 		}
                 } catch (Exception ex) {
@@ -438,7 +437,7 @@ public void keyPressed(KeyEvent e) {
                    String instrument = Constants.STRINGS[instruSelec];
            		   double frequence =i.f[14];
            		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, fi, harmoniquesChoisies);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
             		}
             } catch (Exception ex) {

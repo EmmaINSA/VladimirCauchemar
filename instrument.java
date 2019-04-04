@@ -34,6 +34,20 @@ public class instrument{
                 amplitudeTable.add(tempTable[j]);
                 }
             }
+        else if (nom == "Pan_Flute"){
+            double[] tempTable = {1,0.65,0.61,0.15,0.09,0.02,0.02,0.01,0.01,0.01,0,0,0,0.01,0};
+            coeffAmplitude = 1;
+                for (int j = 0; j<tempTable.length ; j++) {
+                amplitudeTable.add(tempTable[j]);
+                }
+            }
+        else if (nom == "Church_Organ"){
+            double[] tempTable = {1,0.65,0.49,0.51,0.5,0.5,0.38,0.1,0.01,0.08,0.06,0,0,0.01,0};
+            coeffAmplitude = 1;
+                for (int j = 0; j<tempTable.length ; j++) {
+                amplitudeTable.add(tempTable[j]);
+                }
+            }
             
            
            f[0]=440;
