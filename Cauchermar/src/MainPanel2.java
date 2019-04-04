@@ -5,6 +5,7 @@
 
 
 
+
 //===========================================================================================================================
 // Imports
 //===========================================================================================================================
@@ -25,42 +26,47 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.util.LinkedList;
 
-public class MainPanel extends JPanel {
+
+public class MainPanel2 extends JPanel {
 
 //===========================================================================================================================
 // Constructeur
 //===========================================================================================================================
 
-public MainPanel(String instrument, double frequence) {
+public MainPanel2(String instrument, double frequence, LinkedList<Integer> harmoniques) {
+
 
     int nbPoint = (int)(2500000/frequence);
 
     instrument instru = new instrument(instrument);
 
-    List<Double> plot = new ArrayList<>();
+    List<List<Double>> plot = new ArrayList<List<Double>>(harmoniques.size());
 
     String rang = 1+"";
- 
-    for (int k = 0; k<nbPoint; k++){
-        plot.add(instru.synthesisFunction(frequence,k));
-    }
+
+        for (int l = 0; l<harmoniques.size(); l++){
+            plot.add(new ArrayList<Double>());
+            for (int k = 0; k<nbPoint; k++){
+            plot.get(l).add(instru.simpleFunction(frequence,k,harmoniques.get(l)));
+            }
+        }
+
+    JPanel graphPanel = new GraphPanel(plot,frequence,harmoniques);
 
     setLayout(new BorderLayout());
 
     JLabel title = new JLabel("");
 
-
-    title = new JLabel("Signal obtenu par synthese");
+    title = new JLabel("Signal decompose");
 
     title.setFont(new Font("Arial", Font.BOLD, 25));
     title.setHorizontalAlignment(JLabel.CENTER);
 
-    JPanel graphPanel = new GraphPanel(plot,frequence);
+    MainPanel2.VerticalPanel vertPanel = new MainPanel2.VerticalPanel();
 
-    MainPanel.VerticalPanel vertPanel = new MainPanel.VerticalPanel();
-
-    MainPanel.HorizontalPanel horiPanel = new MainPanel.HorizontalPanel();
+    MainPanel2.HorizontalPanel horiPanel = new MainPanel2.HorizontalPanel();
 
     add(title, BorderLayout.NORTH);
     add(horiPanel, BorderLayout.SOUTH);
@@ -69,7 +75,7 @@ public MainPanel(String instrument, double frequence) {
 }
 
 //===========================================================================================================================
-
+// Sous-panel pour l'axe des ordonnee
 //===========================================================================================================================
 
 class VerticalPanel extends JPanel {
@@ -150,17 +156,22 @@ static class GraphPanel extends JPanel {
     private int heigth = 400;
     private int padding = 25;
     private int labelPadding = 25;
-    private Color lineColor = new Color(0,0,0);
+    private Color[] lineColor = {new Color(0,0,255), new Color(155,0,191), new Color(191,0,74), new Color(150,191,0),
+                                new Color(0,150,191), new Color(0,74,191), new Color(0,0,255), new Color(78,0,191), 
+                                new Color(73,191,0), new Color(0,191,2), new Color(0,191,78), new Color(0,191,155), 
+                                new Color(191,79,0), new Color(191,0,150), new Color(191,155,0)};
     private Color gridColor = new Color(200, 200, 200, 200);
     private static final Stroke GRAPH_STROKE = new BasicStroke(2f);
     private int pointWidth = 4;
     private int numberYDivisions = 10;
-    private List<Double> plot;
+    private List<List<Double>> plot;
     private double frequence;
+    private LinkedList<Integer> harmoniques;
 
-    public GraphPanel(List<Double> plot, double frequence) {
+    public GraphPanel(List<List<Double>> plot, double frequence, LinkedList<Integer> harmoniques) {
         this.plot = plot;
         this.frequence = frequence;
+        this.harmoniques = harmoniques;
     }
 
     protected void paintComponent(Graphics g) {
@@ -168,14 +179,18 @@ static class GraphPanel extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        double xScale = ((double) getWidth() - (2 * padding) - labelPadding) / (plot.size() - 1);
+        double xScale = ((double) getWidth() - (2 * padding) - labelPadding) / (plot.get(0).size() - 1);
         double yScale = ((double) getHeight() - 2 * padding - labelPadding) / (getMaxScore() - getMinScore());
 
-        List<Point> graphPoints = new ArrayList<>();
-        for (int i = 0; i < plot.size(); i++) {
-            int x1 = (int) (i * xScale + padding + labelPadding);
-            int y1 = (int) ((getMaxScore() - plot.get(i)) * yScale + padding);
-            graphPoints.add(new Point(x1, y1));
+        List<List<Point>> graphPoints = new ArrayList<List<Point>>();
+
+        for (int j = 0; j < plot.size(); j++){
+            graphPoints.add(new ArrayList<Point>());
+            for (int i = 0; i < plot.get(0).size(); i++) {
+                int x1 = (int) (i * xScale + padding + labelPadding);
+                int y1 = (int) ((getMaxScore() - plot.get(j).get(i)) * yScale + padding);
+                graphPoints.get(j).add(new Point(x1, y1));
+            }
         }
 
         //===========================================================================================================================
@@ -187,14 +202,14 @@ static class GraphPanel extends JPanel {
         g2.setColor(Color.BLACK);
 
         //===========================================================================================================================
-       
+        // Grille et echelle en Y
         //===========================================================================================================================
         for (int i = 0; i < numberYDivisions + 1; i++) {
             int x0 = padding + labelPadding;
             int x1 = pointWidth + padding + labelPadding;
             int y0 = getHeight() - ((i * (getHeight() - padding * 2 - labelPadding)) / numberYDivisions + padding + labelPadding);
             int y1 = y0;
-            if (plot.size() > 0) {
+            if (plot.get(0).size() > 0) {
                 g2.setColor(gridColor);
                 g2.drawLine(padding + labelPadding + 1 + pointWidth, y0, getWidth() - padding, y1);
                 g2.setColor(Color.BLACK);
@@ -207,7 +222,7 @@ static class GraphPanel extends JPanel {
         }
 
         //===========================================================================================================================
-      
+        // Grille et echelle en X
         //===========================================================================================================================
         
         int graduation = (int)Math.round(25000/frequence);
@@ -237,47 +252,52 @@ static class GraphPanel extends JPanel {
         g2.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, getWidth() - padding, getHeight() - padding - labelPadding);
 
         Stroke oldStroke = g2.getStroke();
-        g2.setColor(lineColor);
+
         g2.setStroke(GRAPH_STROKE);
-        for (int i = 0; i < graphPoints.size() - 1; i++) {
-            int x1 = graphPoints.get(i).x;
-            int y1 = graphPoints.get(i).y;
-            int x2 = graphPoints.get(i + 1).x;
-            int y2 = graphPoints.get(i + 1).y;
-            g2.drawLine(x1, y1, x2, y2);
+
+        for (int j = 0; j < graphPoints.size(); j++){
+            g2.setColor(lineColor[harmoniques.get(j)]);
+            for (int i = 0; i < graphPoints.get(0).size() - 1; i++) {
+                int x1 = graphPoints.get(j).get(i).x;
+                int y1 = graphPoints.get(j).get(i).y;
+                int x2 = graphPoints.get(j).get(i + 1).x;
+                int y2 = graphPoints.get(j).get(i + 1).y;
+                g2.drawLine(x1, y1, x2, y2);
+            }
         }
-
-        g2.setStroke(oldStroke);
-
     }
 
 //===========================================================================================================================
-
+// Methodes utiles
 //===========================================================================================================================
 
     private double getMinScore() {
         double minScore = Double.MAX_VALUE;
-        for (Double score : plot) {
-            minScore = Math.min(minScore, score);
+        for (int k = 0; k<plot.size(); k++){
+            for (Double score : plot.get(k)) {
+                minScore = Math.min(minScore, score);
+            }
         }
         return minScore;
     }
 
     private double getMaxScore() {
         double maxScore = Double.MIN_VALUE;
-        for (Double score : plot) {
-            maxScore = Math.max(maxScore, score);
+        for (int k = 0; k<plot.size(); k++){
+            for (Double score : plot.get(k)) {
+                maxScore = Math.max(maxScore, score);
+            }
         }
         return maxScore;
     }
 
-    public void setScores(List<Double> plot) {
+    public void setScores(List<List<Double>> plot) {
         this.plot = plot;
         invalidate();
         this.repaint();
     }
 
-    public List<Double> getScores() {
+    public List<List<Double>> getScores() {
         return plot;
     }
 

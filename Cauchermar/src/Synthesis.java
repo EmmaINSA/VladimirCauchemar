@@ -17,13 +17,13 @@ public class Synthesis extends JFrame{
 
 			setSize(width,height);
 			setTitle(title);
-			setLocation(610,500);
+			setLocation(90,500);
 
 //===========================================================================================================================
 //	Add Label
 //===========================================================================================================================
 
-			MainPanel mp = new MainPanel(instrument, frequence, "synthesis");
+			MainPanel mp = new MainPanel(instrument, frequence);
 			add(mp);
 
 //===========================================================================================================================

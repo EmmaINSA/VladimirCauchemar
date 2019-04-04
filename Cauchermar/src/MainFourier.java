@@ -3,7 +3,7 @@
 //===========================================================================================================================
 
 
-// Cette classe contient tout les ¨¦l¨¦ments graphiques permettant de repr¨¦senter le transforme de Fourier
+// 
 // Elle est de type 
 
 
@@ -66,7 +66,7 @@ public MainFourier(String instrument, double frequence) {
 }
 
 //===========================================================================================================================
-// Sous-panel pour l'axe des ordonn¨¦e
+
 //===========================================================================================================================
 
 class VerticalPanel extends JPanel {
@@ -84,7 +84,7 @@ class VerticalPanel extends JPanel {
 
         Font font = new Font("Arial", Font.PLAIN, 15);
 
-        String string = "Amplitude (mV)";
+        String string = "Amplitude (ua)";
 
         FontMetrics metrics = g.getFontMetrics(font);
         int width = metrics.stringWidth(string);
@@ -147,8 +147,14 @@ static class GraphPanel extends JPanel {
     private int heigth = 400;
     private int padding = 25;
     private int labelPadding = 25;
-    private Color lineColor = new Color(44, 102, 230, 180);
-    private Color pointColor = new Color(100, 100, 100, 180);
+    private Color[] lineColor = {new Color(0,0,255), new Color(155,0,191), new Color(191,0,74), new Color(150,191,0),
+                                new Color(0,150,191), new Color(0,74,191), new Color(0,0,255), new Color(78,0,191), 
+                                new Color(73,191,0), new Color(0,191,2), new Color(0,191,78), new Color(0,191,155), 
+                                new Color(191,79,0), new Color(191,0,150), new Color(191,155,0)};
+    private Color[] pointColor = {new Color(0,0,255), new Color(155,0,191), new Color(191,0,74), new Color(150,191,0),
+                                new Color(0,150,191), new Color(0,74,191), new Color(0,0,255), new Color(78,0,191), 
+                                new Color(73,191,0), new Color(0,191,2), new Color(0,191,78), new Color(0,191,155), 
+                                new Color(191,79,0), new Color(191,0,150), new Color(191,155,0)};
     private Color gridColor = new Color(200, 200, 200, 200);
     private static final Stroke GRAPH_STROKE = new BasicStroke(2f);
     private int pointWidth = 4;
@@ -185,7 +191,7 @@ static class GraphPanel extends JPanel {
         g2.setColor(Color.BLACK);
 
         //===========================================================================================================================
-        // Grille et ¨¦chelle en Y
+       
         //===========================================================================================================================
         for (int i = 0; i < numberYDivisions + 1; i++) {
             int x0 = padding + labelPadding;
@@ -205,7 +211,7 @@ static class GraphPanel extends JPanel {
         }
 
         //===========================================================================================================================
-        // Grille et ¨¦chelle en X
+      
         //===========================================================================================================================
         
         int graduation = (int)Math.round(plot.size());
@@ -235,9 +241,9 @@ static class GraphPanel extends JPanel {
         g2.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, getWidth() - padding, getHeight() - padding - labelPadding);
 
         Stroke oldStroke = g2.getStroke();
-        g2.setColor(lineColor);
         g2.setStroke(GRAPH_STROKE);
         for (int i = 0; i < graphPoints.size() - 1; i++) {
+            g2.setColor(lineColor[i]);
             int x1 = graphPoints.get(i).x;
             int y1 = graphPoints.get(i).y;
             int y0 = (int)(padding+(yScale*getMaxScore()));
@@ -245,8 +251,8 @@ static class GraphPanel extends JPanel {
         }
 
         g2.setStroke(oldStroke);
-        g2.setColor(pointColor);
         for (int i = 0; i < graphPoints.size(); i++) {
+            g2.setColor(pointColor[i]);
             int x = graphPoints.get(i).x - pointWidth / 2;
             int y = graphPoints.get(i).y - pointWidth / 2;
             int ovalW = pointWidth;
@@ -256,7 +262,7 @@ static class GraphPanel extends JPanel {
     }
 
 //===========================================================================================================================
-// M¨¦thodes utiles
+
 //===========================================================================================================================
 
     private double getMinScore() {
