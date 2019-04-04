@@ -3,7 +3,8 @@
 //===========================================================================================================================
 
 
-
+// Cette classe contient tout les elements graphiques permettant de representer un signal en fonction du temps
+// Elle est de type JPanel et prend en entree un objet de type synthesisFunction ou simpleFunction (se referrer a instrument.java)
 
 
 //===========================================================================================================================

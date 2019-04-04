@@ -2,7 +2,10 @@ import javax.swing.*;
 import java.util.LinkedList;
 
 public class Unique extends JFrame{
-		public Unique(String instrument, double frequence, LinkedList<Integer> harmoniques){
+
+	MainPanel2 mp;
+
+		public Unique(){
 
 //===========================================================================================================================
 // Just some variables
@@ -20,16 +23,15 @@ public class Unique extends JFrame{
 			setTitle(title);
 			setLocation(1130,500);
 
-
-
-			MainPanel2 mp = new MainPanel2(instrument, frequence, harmoniques);
-			add(mp);
-
 //===========================================================================================================================
 //	Set Visible
 //===========================================================================================================================
 
-			setVisible(true);
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		}
+
+		public void refresh(String instrument, double frequence, LinkedList<Integer> harmoniques){
+			mp = new MainPanel2(instrument, frequence, harmoniques);
+			add(mp);
 		}
 }

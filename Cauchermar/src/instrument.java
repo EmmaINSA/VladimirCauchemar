@@ -6,7 +6,7 @@ public class instrument{
     double[] f=new double[15];
     double df=1.122462048;
     List<Double> amplitudeTable = new ArrayList<>();
-    //ce tableau contiendra les harmoniques avec leurs amplitudes pond¨¦r¨¦s
+    //ce tableau contiendra les harmoniques avec leurs amplitudes pond¡§r¡§s
     //les harmoniques sont obtenus par mutltiple de f fondamental
     double coeffAmplitude;
     //si besoin amplifier amplitudes selon instrument car tableau relatif a A0 = 1
@@ -29,6 +29,20 @@ public class instrument{
             }
         else if (nom == "Clarinet"){
             double[] tempTable = {1,0.36,0.26,0.02,0.08,0.2,0.03,0.01,0.01,0,0,0,0,0.01,0};
+            coeffAmplitude = 1;
+                for (int j = 0; j<tempTable.length ; j++) {
+                amplitudeTable.add(tempTable[j]);
+                }
+            }
+        else if (nom == "Pan_Flute"){
+            double[] tempTable = {1,0.65,0.61,0.15,0.09,0.02,0.02,0.01,0.01,0.01,0,0,0,0.01,0};
+            coeffAmplitude = 1;
+                for (int j = 0; j<tempTable.length ; j++) {
+                amplitudeTable.add(tempTable[j]);
+                }
+            }
+        else if (nom == "Church_Organ"){
+            double[] tempTable = {1,0.65,0.49,0.51,0.5,0.5,0.38,0.1,0.01,0.08,0.06,0,0,0.01,0};
             coeffAmplitude = 1;
                 for (int j = 0; j<tempTable.length ; j++) {
                 amplitudeTable.add(tempTable[j]);

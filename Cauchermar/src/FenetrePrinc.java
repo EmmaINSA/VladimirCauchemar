@@ -10,15 +10,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.LinkedList;
 import javax.swing.JCheckBox;
-
 import org.jfugue.player.Player;
-//import org.jfugue.player.Player;
 
 /* A faire :
 * - les panels principaux avec tout le reste
 *
 * La morale de cette histoire :
-* "Quand tu as un prob¨¨me que tu ne sais pas r¨¦soudre, contourne-le !"
+* "Quand tu as un probleme que tu ne sais pas resoudre, contourne-le !"
 * Grand maitre anonyme 2019
 * */
 
@@ -36,9 +34,12 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
     protected JPanel mainPanel;
     protected JCheckBox AfficherGraphe;
     LinkedList<Integer> harmoniquesChoisies;
+    protected Synthesis s;
+    protected Analysis a;
+    protected Unique u;
     
     public FenetrePrinc() {
-        super("Simulateur d'instruments ¨¤ vent");
+        super("Simulateur d'instruments ¡§a vent");
         init();
     }
 
@@ -67,6 +68,11 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
 
         this.setVisible(true);
         addKeyListener(this);
+
+        //graph
+        s = new Synthesis();
+        a = new Analysis();
+        u = new Unique();
     }
 
     private void menuBar(){
@@ -88,12 +94,12 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         itemFluteDePan.addActionListener(this);
 
         // flute a bec
-        itemFluteABec = new JMenuItem("Flute ¨¤ bec");
-//        itemFluteABec.getAccessibleContext().setAccessibleDescription("Flute ¨¤ bec pas encore dispo");
+        itemFluteABec = new JMenuItem("Flute ¡§a bec");
+//        itemFluteABec.getAccessibleContext().setAccessibleDescription("Flute ¡§a bec pas encore dispo");
         menuInstruments.add(itemFluteABec);
         itemFluteABec.addActionListener(this);
 
-        menuInstruments.addSeparator();      // pour s¨¦parer vents & cordes ?
+        menuInstruments.addSeparator();      // pour separer vents & cordes ?
 
         // clarinette
         itemClarinette = new JMenuItem("Clarinette");
@@ -131,8 +137,8 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         menuOptions.add(AfficherGraphe);
         AfficherGraphe.addActionListener(this);
         
-        // r¨¦solution
-        submenuResolution = new JMenu("R¨¦solution");
+        // resolution
+        submenuResolution = new JMenu("Resolution");
         reso600_400 = new JMenuItem("600x400");
         submenuResolution.add(reso600_400);
         reso1000_600 = new JMenuItem("1000x600");
@@ -159,7 +165,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         Object source = e.getSource();
 
         if (source == this.itemFluteABec){
-            System.out.println("Flute ¨¤ bec");
+            System.out.println("Flute a bec");
             this.setInstruSelec(Constants.FLUTEABEC);
 
         }
@@ -212,7 +218,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         }
 
         else{
-            System.out.println("Pas d'action sp¨¦cifi¨¦e");
+            System.out.println("Pas d'action specifiee");
         }
     }
     
@@ -233,9 +239,8 @@ public void keyPressed(KeyEvent e) {
                        String instrument = Constants.STRINGS[instruSelec];
                		   double frequence =i.f[0];
                		if(AfficherGraphe.isSelected()){
-                		Synthesis s = new Synthesis (instrument, frequence);
-                		Unique u = new Unique (instrument, frequence,harmoniquesChoisies);
-                		Analysis a = new Analysis (instrument, frequence);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
                 		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -248,9 +253,8 @@ public void keyPressed(KeyEvent e) {
                      String instrument = Constants.STRINGS[instruSelec];
              		 double frequence =i.f[1];
              		if(AfficherGraphe.isSelected()){
-                		Synthesis s = new Synthesis (instrument, frequence);
-                		Unique u = new Unique (instrument, frequence,harmoniquesChoisies);
-                		Analysis a = new Analysis (instrument, frequence);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
                 		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -263,9 +267,8 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[2];
             		if(AfficherGraphe.isSelected()){
-                		Synthesis s = new Synthesis (instrument, frequence);
-                		Unique u = new Unique (instrument, frequence,harmoniquesChoisies);
-                		Analysis a = new Analysis (instrument, frequence);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
                 		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -278,9 +281,8 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[3];
             		if(AfficherGraphe.isSelected()){
-                		Synthesis s = new Synthesis (instrument, frequence);
-                		Unique u = new Unique (instrument, frequence,harmoniquesChoisies);
-                		Analysis a = new Analysis (instrument, frequence);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
                 		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -293,9 +295,8 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[4];
             		if(AfficherGraphe.isSelected()){
-                		Synthesis s = new Synthesis (instrument, frequence);
-                		Unique u = new Unique (instrument, frequence,harmoniquesChoisies);
-                		Analysis a = new Analysis (instrument, frequence);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
                 		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -308,9 +309,8 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[5];
             		if(AfficherGraphe.isSelected()){
-                		Synthesis s = new Synthesis (instrument, frequence);
-                		Unique u = new Unique (instrument, frequence,harmoniquesChoisies);
-                		Analysis a = new Analysis (instrument, frequence);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
                 		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -323,9 +323,8 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[6];
             		if(AfficherGraphe.isSelected()){
-                		Synthesis s = new Synthesis (instrument, frequence);
-                		Unique u = new Unique (instrument, frequence,harmoniquesChoisies);
-                		Analysis a = new Analysis (instrument, frequence);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
                 		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -338,9 +337,8 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[7];
             		if(AfficherGraphe.isSelected()){
-                		Synthesis s = new Synthesis (instrument, frequence);
-                		Unique u = new Unique (instrument, frequence,harmoniquesChoisies);
-                		Analysis a = new Analysis (instrument, frequence);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
                 		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -353,9 +351,8 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[8];
             		if(AfficherGraphe.isSelected()){
-            		Synthesis s = new Synthesis (instrument, frequence);
-            		Unique u = new Unique (instrument, frequence,harmoniquesChoisies);
-            		Analysis a = new Analysis (instrument, frequence);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
             		}
                     
                 } catch (Exception ex) {
@@ -369,9 +366,8 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[9];
             		if(AfficherGraphe.isSelected()){
-                		Synthesis s = new Synthesis (instrument, frequence);
-                		Unique u = new Unique (instrument, frequence,harmoniquesChoisies);
-                		Analysis a = new Analysis (instrument, frequence);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
                 		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -384,9 +380,8 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[10];
             		if(AfficherGraphe.isSelected()){
-                		Synthesis s = new Synthesis (instrument, frequence);
-                		Unique u = new Unique (instrument, frequence,harmoniquesChoisies);
-                		Analysis a = new Analysis (instrument, frequence);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
                 		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -399,9 +394,8 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[11];
             		if(AfficherGraphe.isSelected()){
-                		Synthesis s = new Synthesis (instrument, frequence);
-                		Unique u = new Unique (instrument, frequence,harmoniquesChoisies);
-                		Analysis a = new Analysis (instrument, frequence);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
                 		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -414,9 +408,8 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[12];
             		if(AfficherGraphe.isSelected()){
-                		Synthesis s = new Synthesis (instrument, frequence);
-                		Unique u = new Unique (instrument, frequence,harmoniquesChoisies);
-                		Analysis a = new Analysis (instrument, frequence);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
                 		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -429,9 +422,8 @@ public void keyPressed(KeyEvent e) {
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[13];
             		if(AfficherGraphe.isSelected()){
-                		Synthesis s = new Synthesis (instrument, frequence);
-                		Unique u = new Unique (instrument, frequence,harmoniquesChoisies);
-                		Analysis a = new Analysis (instrument, frequence);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
                 		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -445,9 +437,8 @@ public void keyPressed(KeyEvent e) {
                    String instrument = Constants.STRINGS[instruSelec];
            		   double frequence =i.f[14];
            		if(AfficherGraphe.isSelected()){
-            		Synthesis s = new Synthesis (instrument, frequence);
-            		Unique u = new Unique (instrument, frequence,harmoniquesChoisies);
-            		Analysis a = new Analysis (instrument, frequence);
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
             		}
             } catch (Exception ex) {
                     Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -472,7 +463,7 @@ public void keyPressed(KeyEvent e) {
         }
     }
 
-    // pour que chaque composant ait le m¨ºme instrument s¨¦lectionn¨¦, utiliser cette m¨¦thode
+    // pour que chaque composant ait le m¡§me instrument s¡§lectionn¡§, utiliser cette m¡§thode
     // --- A REMPLIR POUR LES AUTRES PANELS ---
     private void setInstruSelec(int instrument){
         this.instruSelec = instrument;
@@ -489,6 +480,19 @@ public void keyPressed(KeyEvent e) {
                 SelectedElements.add(i);
 
         return SelectedElements;
+    }
+
+    private void rendreVisible(){
+        s.setVisible(true);
+        a.setVisible(true);
+        u.setVisible(true);
+        this.setVisible(true);
+    }
+
+    private void rafraichir(String instrument, double frequence, LinkedList<Integer> harmoniques){
+        a.refresh(instrument, frequence);
+        u.refresh(instrument, frequence, harmoniquesChoisies);
+        s.refresh(instrument, frequence);
     }
 
 }

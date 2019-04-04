@@ -3,7 +3,7 @@
 //===========================================================================================================================
 
 
-// 
+// Cette classe contient tout les elements graphiques permettant de representer le transforme de Fourier
 // Elle est de type 
 
 
@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.util.LinkedList;
 
 public class MainFourier extends JPanel {
 
@@ -66,7 +67,7 @@ public MainFourier(String instrument, double frequence) {
 }
 
 //===========================================================================================================================
-
+// Sous-panel pour l'axe des ordonnee
 //===========================================================================================================================
 
 class VerticalPanel extends JPanel {
@@ -191,7 +192,7 @@ static class GraphPanel extends JPanel {
         g2.setColor(Color.BLACK);
 
         //===========================================================================================================================
-       
+        // Grille et echelle en Y
         //===========================================================================================================================
         for (int i = 0; i < numberYDivisions + 1; i++) {
             int x0 = padding + labelPadding;
@@ -211,7 +212,7 @@ static class GraphPanel extends JPanel {
         }
 
         //===========================================================================================================================
-      
+        // Grille et echelle en X
         //===========================================================================================================================
         
         int graduation = (int)Math.round(plot.size());
@@ -262,7 +263,7 @@ static class GraphPanel extends JPanel {
     }
 
 //===========================================================================================================================
-
+// Methodes utiles
 //===========================================================================================================================
 
     private double getMinScore() {

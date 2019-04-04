@@ -2,7 +2,10 @@ import javax.swing.*;
 import java.util.LinkedList;
 
 public class Analysis extends JFrame{
-		public Analysis(String instrument, double frequence){
+
+	MainFourier mp;
+
+		public Analysis(){
 
 //===========================================================================================================================
 // Just some variables
@@ -21,17 +24,16 @@ public class Analysis extends JFrame{
 			setLocation(610,500);
 
 //===========================================================================================================================
-//	Add Label
+//	Set Visible False
 //===========================================================================================================================
 
-			MainFourier mp = new MainFourier(instrument, frequence);
-			add(mp);
-
-//===========================================================================================================================
-//	Set Visible
-//===========================================================================================================================
-
-			setVisible(true);
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		}
+
+		public void refresh(String instrument, double frequence){
+ 			mp = new MainFourier(instrument, frequence);
+			add(mp);
+		}
+
+
 }
