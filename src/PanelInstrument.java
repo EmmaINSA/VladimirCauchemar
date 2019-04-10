@@ -8,7 +8,7 @@ public class PanelInstrument extends JPanel {
 
     private int instruSelec = 0, width, height;
     private Image bg = null;
-    private Image[] bgs = {null, null, null, null, null};        // tableau de bgs √† s√©lectionner
+    private Image[] bgs = {null, null, null, null, null};        // tableau de bgs ®§ s®¶lectionner
 
     public PanelInstrument() {
         this.init();
@@ -27,7 +27,6 @@ public class PanelInstrument extends JPanel {
         }catch (IOException e){
             e.printStackTrace();
         }
-        System.out.println(new File("Instrument Pics/flutevuedecoupe.jpg").canRead());
     }
 
     public void setInstruSelec(int instrument) {
