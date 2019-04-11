@@ -1,10 +1,9 @@
 //===========================================================================================================================
-// Description
+//
+// Pannel contenant tout les element graphiques necessaires au trace d'un des 3 graphiques : les signaux decomposes
+//
 //===========================================================================================================================
 
-
-// Cette classe contient tout les elements graphiques permettant de representer un signal en fonction du temps
-// Elle est de type JPanel et prend en entree un objet de type synthesisFunction ou simpleFunction (se referrer a instrument.java)
 
 
 //===========================================================================================================================
@@ -37,7 +36,6 @@ public class MainPanel2 extends JPanel {
 //===========================================================================================================================
 
 public MainPanel2(String instrument, double frequence, LinkedList<Integer> harmoniques) {
-
 
     int nbPoint = (int)(2500000/frequence);
 

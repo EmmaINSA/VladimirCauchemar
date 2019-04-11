@@ -1,3 +1,13 @@
+//===========================================================================================================================
+//
+// Classe contenant : 
+// -> les ponderations en amplitude des differentes harmoniques de Fourier
+// -> les methodes mathematiques permettant de construire une fonction periodique complexe par la somme des fonctions 
+//    sinusoidales associe aux harmoniques de Fourier (partie SCIENCE du projet!!!)
+//
+//===========================================================================================================================
+
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -6,8 +16,9 @@ public class instrument{
     double[] f=new double[15];
     double df=1.122462048;
     List<Double> amplitudeTable = new ArrayList<>();
-    //ce tableau contiendra les harmoniques avec leurs amplitudes pond¨¦r¨¦s
+    //ce tableau contiendra les harmoniques avec leurs amplitudes ponderes
     //les harmoniques sont obtenus par mutltiple de f fondamental
+    
     double coeffAmplitude;
     //si besoin amplifier amplitudes selon instrument car tableau relatif a A0 = 1
 	
@@ -75,7 +86,6 @@ public class instrument{
             }
             
         public double simpleFunction (double frequence, double temps, int n){  
-            // n=0 est bien la fondamentale et non pas n=1!!!
             
             double synthesisAmplitude = amplitudeTable.get(n)*Math.sin(2*Math.PI*frequence*0.000001*temps*(n+1));
             

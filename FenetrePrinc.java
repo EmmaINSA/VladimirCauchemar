@@ -1,3 +1,10 @@
+//===========================================================================================================================
+//
+// Comme son nom l'indique, c'est la fenetre principale, qui traite toute l'IHM (listeners en entres, affichage graphique en sortie...)
+//
+//===========================================================================================================================
+
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,13 +19,11 @@ import java.util.LinkedList;
 import javax.swing.JCheckBox;
 //import org.jfugue.player.Player;
 
-/* A faire :
-* - les panels principaux avec tout le reste
-*
+/*
 * La morale de cette histoire :
 * "Quand tu as un probleme que tu ne sais pas resoudre, contourne-le !"
 * Grand maitre anonyme 2019
-* */
+*/
 
 public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
 
@@ -69,7 +74,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         this.setVisible(true);
         addKeyListener(this);
 
-        //graph
+        //graphes
         s = new Synthesis();
         a = new Analysis();
         u = new Unique();
@@ -118,15 +123,14 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
 
         //menuHarmoniques : selection d'harmoniques par checkbox
         menuHarmoniques = new JMenu("Harmoniques");
-
         GroupeHarmonique = new JCheckBox[15];
 
-        for(int i = 0; i<GroupeHarmonique.length; i++){
-            GroupeHarmonique[i] = new JCheckBox(""+i);
-            menuHarmoniques.add(GroupeHarmonique[i]);
-            GroupeHarmonique[i].addActionListener(this);
-        }
-
+            for(int i = 0; i<GroupeHarmonique.length; i++){
+                GroupeHarmonique[i] = new JCheckBox(""+i);
+                menuHarmoniques.add(GroupeHarmonique[i]);
+                GroupeHarmonique[i].addActionListener(this);
+            }
+            
         menuBar.add(menuHarmoniques);
 
         // options

@@ -1,10 +1,9 @@
 //===========================================================================================================================
-// Description
+//
+// Pannel contenant tout les element graphiques necessaires au trace d'un des 3 graphiques : la synthese de Fourier
+//
 //===========================================================================================================================
 
-
-// Cette classe contient tout les elements graphiques permettant de repr¨¦senter un signal en fonction du temps
-// Elle est de type JPanel et prend en entr¨¦e un objet de type synthesisFunction ou simpleFunction (se r¨¦ferrer ¨¤ instrument.java)
 
 
 //===========================================================================================================================
