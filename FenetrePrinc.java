@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.LinkedList;
 import javax.swing.JCheckBox;
-import org.jfugue.player.Player;
+//import org.jfugue.player.Player;
 
 /* A faire :
 * - les panels principaux avec tout le reste
@@ -33,7 +33,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
     protected PanelInstrument panelInstru;
     protected JPanel mainPanel;
     protected JCheckBox AfficherGraphe;
-    LinkedList<Integer> harmoniquesChoisies;
+    protected LinkedList<Integer> harmoniquesChoisies;    
     protected Synthesis s;
     protected Analysis a;
     protected Unique u;
@@ -190,6 +190,10 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
             System.out.println("Orgue");
             this.setInstruSelec(Constants.ORGUE);
         }
+        
+        else if (source == this.AfficherGraphe){
+            System.out.println("Affichage graphique active");
+        }
 
         else if ((source == this.GroupeHarmonique[0])||(source == this.GroupeHarmonique[1])||(source == this.GroupeHarmonique[2])||
                 (source == this.GroupeHarmonique[3])||(source == this.GroupeHarmonique[4])||(source == this.GroupeHarmonique[5])||
@@ -230,12 +234,12 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
 
 public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-		Player player = new Player();
+		// player = new Player();
 
         if (keyCode == KeyEvent.VK_Q) {
                
                 try {
-                	   player.play("I["+Constants.STRINGS[instruSelec]+"] C5q");
+                	  // player.play("I["+Constants.STRINGS[instruSelec]+"] C5q");
                        String instrument = Constants.STRINGS[instruSelec];
                		   double frequence =i.f[0];
                		if(AfficherGraphe.isSelected()){
@@ -249,7 +253,7 @@ public void keyPressed(KeyEvent e) {
         if (keyCode == KeyEvent.VK_W) {
                 
                 try {
-                	 player.play("I["+Constants.STRINGS[instruSelec]+"] D5q");
+                	 // player.play("I["+Constants.STRINGS[instruSelec]+"] D5q");
                      String instrument = Constants.STRINGS[instruSelec];
              		 double frequence =i.f[1];
              		if(AfficherGraphe.isSelected()){
@@ -291,7 +295,7 @@ public void keyPressed(KeyEvent e) {
         if (keyCode == KeyEvent.VK_T) {
                 
                 try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] G5q");
+                	// player.play("I["+Constants.STRINGS[instruSelec]+"] G5q");
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[4];
             		if(AfficherGraphe.isSelected()){
@@ -305,7 +309,7 @@ public void keyPressed(KeyEvent e) {
         if (keyCode == KeyEvent.VK_Y) {
                
                 try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] A5q");
+                	// player.play("I["+Constants.STRINGS[instruSelec]+"] A5q");
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[5];
             		if(AfficherGraphe.isSelected()){
@@ -319,7 +323,7 @@ public void keyPressed(KeyEvent e) {
         if (keyCode == KeyEvent.VK_U) {
                 
                 try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] B5q");
+                	// player.play("I["+Constants.STRINGS[instruSelec]+"] B5q");
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[6];
             		if(AfficherGraphe.isSelected()){
@@ -333,7 +337,7 @@ public void keyPressed(KeyEvent e) {
         if (keyCode == KeyEvent.VK_A) {
                
                 try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] C6q");
+                	// player.play("I["+Constants.STRINGS[instruSelec]+"] C6q");
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[7];
             		if(AfficherGraphe.isSelected()){
@@ -347,7 +351,7 @@ public void keyPressed(KeyEvent e) {
         if (keyCode == KeyEvent.VK_S) {
                
                 try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] D6q");
+                	// player.play("I["+Constants.STRINGS[instruSelec]+"] D6q");
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[8];
             		if(AfficherGraphe.isSelected()){
@@ -362,7 +366,7 @@ public void keyPressed(KeyEvent e) {
         if (keyCode == KeyEvent.VK_D) {
                 
                 try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] E6q");
+                	// player.play("I["+Constants.STRINGS[instruSelec]+"] E6q");
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[9];
             		if(AfficherGraphe.isSelected()){
@@ -376,7 +380,7 @@ public void keyPressed(KeyEvent e) {
         if (keyCode == KeyEvent.VK_F) {
                 
                 try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] F6q");
+                	// player.play("I["+Constants.STRINGS[instruSelec]+"] F6q");
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[10];
             		if(AfficherGraphe.isSelected()){
@@ -390,7 +394,7 @@ public void keyPressed(KeyEvent e) {
         if (keyCode == KeyEvent.VK_G) {
                
                 try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] G6q");
+                	// player.play("I["+Constants.STRINGS[instruSelec]+"] G6q");
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[11];
             		if(AfficherGraphe.isSelected()){
@@ -404,7 +408,7 @@ public void keyPressed(KeyEvent e) {
         if (keyCode == KeyEvent.VK_H) {
                 
                 try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] A6q");
+                	// player.play("I["+Constants.STRINGS[instruSelec]+"] A6q");
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[12];
             		if(AfficherGraphe.isSelected()){
@@ -418,7 +422,7 @@ public void keyPressed(KeyEvent e) {
         if (keyCode == KeyEvent.VK_J) {
                
                 try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] B6q");
+                	// player.play("I["+Constants.STRINGS[instruSelec]+"] B6q");
                     String instrument = Constants.STRINGS[instruSelec];
             		double frequence =i.f[13];
             		if(AfficherGraphe.isSelected()){
@@ -433,7 +437,7 @@ public void keyPressed(KeyEvent e) {
         if (keyCode == KeyEvent.VK_K) {
             
             try {
-            	   player.play("I["+Constants.STRINGS[instruSelec]+"] C7q");
+            	   // player.play("I["+Constants.STRINGS[instruSelec]+"] C7q");
                    String instrument = Constants.STRINGS[instruSelec];
            		   double frequence =i.f[14];
            		if(AfficherGraphe.isSelected()){
@@ -491,8 +495,15 @@ public void keyPressed(KeyEvent e) {
 
     private void rafraichir(String instrument, double frequence, LinkedList<Integer> harmoniques){
         a.refresh(instrument, frequence);
-        u.refresh(instrument, frequence, harmoniquesChoisies);
         s.refresh(instrument, frequence);
+            if(harmoniques == null){
+                LinkedList<Integer> harmoniquesParDefaut = new LinkedList<Integer>();
+                harmoniquesParDefaut.add(0);
+                u.refresh(instrument, frequence, harmoniquesParDefaut);
+                System.out.println("Vous pouvez choisir les harmoniques que vous souhaitez, la fondamentale etant affichee par defaut");
+            }
+            else 
+                u.refresh(instrument, frequence, harmoniques);
     }
 
 }
