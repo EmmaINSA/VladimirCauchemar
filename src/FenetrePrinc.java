@@ -28,23 +28,20 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
 
 	instrument i=new instrument("Flute");
 	double fi=0;
-    protected int instruSelec=0, x=200, y=50, width = 800, height = 600, instruWidth, instruHeight;    // modifiables via options
-    protected int dureeMin = 1;
-    protected int dureeMax = 10;
-    protected int dureeAct= 5;
-    protected int octaveMin=1;
-    protected int octaveMax=7;
+    protected int instruSelec=0, x=200, y=50, width = 960, height = 720, instruWidth, instruHeight;    // modifiables via options
+    protected int dureeMin = 1, dureeMax = 10, dureeAct= 5;
+    protected int octaveMin=4, octaveMax=7;
     protected String octaveAct="5";
     protected JMenuBar menuBar;
     protected JMenu menuInstruments, menuOptions, submenuResolution, menuAbout;
     protected JMenuItem itemFluteDePan, itemFluteABec, itemClarinette, itemHautbois, itemOrgue,
-            reso1000_600, reso600_400, itemInspi;
+            reso1280_960, reso960_720, reso640_480,  itemInspi;
     protected PanelInstrument panelInstru;
     protected JPanel mainPanel, panelOptions;
     protected JCheckBox AfficherGraphe;
     protected JSlider sliderDuree, sliderOctave;
     protected JLabel labelDuree, labelOctave;
-    private String duree=String.valueOf(dureeAct), octave=String.valueOf(octaveAct);
+    private String duree=String.valueOf(dureeAct);
 
     public FenetrePrinc() {
         super("Simulateur d'instruments à vent");
@@ -162,12 +159,15 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
         
         // résolution
         submenuResolution = new JMenu("Résolution");
-        reso600_400 = new JMenuItem("600x400");
-        submenuResolution.add(reso600_400);
-        reso1000_600 = new JMenuItem("1000x600");
-        submenuResolution.add(reso1000_600);
-        reso1000_600.addActionListener(this);
-        reso600_400.addActionListener(this);
+        reso640_480 = new JMenuItem("640x480");
+        submenuResolution.add(reso640_480);
+        reso960_720 = new JMenuItem("960x720");
+        submenuResolution.add(reso960_720);
+        reso1280_960 = new JMenuItem("1280x960");
+        submenuResolution.add(reso1280_960);
+        reso1280_960.addActionListener(this);
+        reso960_720.addActionListener(this);
+        reso640_480.addActionListener(this);
         menuOptions.add(submenuResolution);
 
         // autres
@@ -179,8 +179,6 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
 
         this.setJMenuBar(menuBar);
         
-        
-
     }
 
     @Override
@@ -190,13 +188,11 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
         if (source == this.itemFluteABec){
             System.out.println("Flûte à bec");
             this.setInstruSelec(Constants.FLUTEABEC);
-
         }
 
         else if (source == this.itemFluteDePan){
             System.out.println("Flûte de pan");
             this.setInstruSelec(Constants.FLUTEDEPAN);
-
         }
 
         else if (source == this.itemClarinette){
@@ -214,12 +210,17 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
             this.setInstruSelec(Constants.ORGUE);
         }
 
-        else if (source ==this.reso600_400){
-            this.setDim(600,400);
+        // Resolutions : 1280*960 / 640*480 / 960*720
+        else if (source ==this.reso960_720){
+            this.setDim(960,720);
         }
 
-        else if (source == this.reso1000_600){
-            this.setDim(1000,600);
+        else if (source == this.reso1280_960){
+            this.setDim(1280,960);
+        }
+
+        else if (source == this.reso640_480){
+            this.setDim(640,480);
         }
 
         else if (source == this.itemInspi){
