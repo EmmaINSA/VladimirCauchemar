@@ -10,6 +10,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.LinkedList;
 import javax.swing.JCheckBox;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import org.jfugue.player.Player;
 
 /* A faire :
@@ -20,23 +23,30 @@ import org.jfugue.player.Player;
 * Grand maitre anonyme 2019
 * */
 
-public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
+public class FenetrePrinc extends JFrame implements ActionListener,ChangeListener,KeyListener{
 
 	instrument i=new instrument("Flute");
 	double fi=0;
     protected int instruSelec=0, x=200, y=50, width = 800, height = 600, instruWidth, instruHeight;    // modifiables via options
+    protected int dureeMin = 1, dureeMax = 10, dureeAct= 5;
+    protected int octaveMin=4, octaveMax=7;
+    protected String octaveAct="5";
     protected JMenuBar menuBar;
     protected JCheckBox[] GroupeHarmonique; 
     protected JMenu menuInstruments, menuOptions, submenuResolution, menuAbout, menuHarmoniques;
     protected JMenuItem itemFluteDePan, itemFluteABec, itemClarinette, itemHautbois, itemOrgue,
             reso1000_600, reso600_400, itemInspi;
     protected PanelInstrument panelInstru;
-    protected JPanel mainPanel;
     protected JCheckBox AfficherGraphe;
+    protected JSlider sliderDuree, sliderOctave;
+    protected JPanel mainPanel, panelOptions;
     LinkedList<Integer> harmoniquesChoisies;
     protected Synthesis s;
     protected Analysis a;
     protected Unique u;
+    private String duree=String.valueOf(dureeAct);
+    protected JLabel labelDuree, labelOctave;
+   
     
     public FenetrePrinc() {
         super("Simulateur d'instruments ¡§a vent");
@@ -61,7 +71,33 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         this.mainPanel.add(this.panelInstru);
         this.setContentPane(this.mainPanel);
 
-        this.setInstruSelec(0);
+      
+        labelDuree = new JLabel("Dur¨¦e ");
+//      labelDuree.setBounds((width-instruWidth)/2, 30, 100,50);
+      panelOptions.add(labelDuree);
+
+      sliderDuree = new JSlider(dureeMin,dureeMax,dureeAct);
+      sliderDuree.setMajorTickSpacing(1);
+      sliderDuree.setMinorTickSpacing(1);
+      sliderDuree.setPaintTicks(true);
+      sliderDuree.setPaintLabels(true);
+      sliderDuree.setValueIsAdjusting(true);
+      sliderDuree.addChangeListener(this);
+      this.panelOptions.add(sliderDuree);
+
+      labelOctave = new JLabel("Octave ");
+      panelOptions.add(labelOctave);
+
+      sliderOctave = new JSlider(octaveMin, octaveMax, Integer.valueOf(octaveAct));
+      sliderOctave.setMajorTickSpacing(1);
+      sliderOctave.setMinorTickSpacing(1);
+      sliderOctave.setPaintLabels(true);
+      sliderOctave.setPaintTicks(true);
+      sliderOctave.setValueIsAdjusting(true);
+      sliderOctave.addChangeListener(this);
+      panelOptions.add(sliderOctave);
+
+      this.setInstruSelec(0);
 
         // barre de menu
         this.menuBar();
@@ -232,129 +268,16 @@ public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
 		Player player = new Player();
 
-        if (keyCode == KeyEvent.VK_Q) {
-               
-                try {
-                	   player.play("I["+Constants.STRINGS[instruSelec]+"] C5q");
-                       String instrument = Constants.STRINGS[instruSelec];
-               		   double frequence =i.f[0];
-               		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, frequence, harmoniquesChoisies);
-                       rendreVisible();
-                		}
-                } catch (Exception ex) {
-                        Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
-        if (keyCode == KeyEvent.VK_W) {
-                
-                try {
-                	 player.play("I["+Constants.STRINGS[instruSelec]+"] D5q");
-                     String instrument = Constants.STRINGS[instruSelec];
-             		 double frequence =i.f[1];
-             		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, frequence, harmoniquesChoisies);
-                       rendreVisible();
-                		}
-                } catch (Exception ex) {
-                        Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
-        if (keyCode == KeyEvent.VK_E) {
-                
-                try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] E5q");
-                    String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[2];
-            		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, frequence, harmoniquesChoisies);
-                       rendreVisible();
-                		}
-                } catch (Exception ex) {
-                        Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
-        if (keyCode == KeyEvent.VK_R) {
-               
-                try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] F5q");
-                    String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[3];
-            		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, frequence, harmoniquesChoisies);
-                       rendreVisible();
-                		}
-                } catch (Exception ex) {
-                        Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
-        if (keyCode == KeyEvent.VK_T) {
-                
-                try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] G5q");
-                    String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[4];
-            		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, frequence, harmoniquesChoisies);
-                       rendreVisible();
-                		}
-                } catch (Exception ex) {
-                        Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
-        if (keyCode == KeyEvent.VK_Y) {
-               
-                try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] A5q");
-                    String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[5];
-            		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, frequence, harmoniquesChoisies);
-                       rendreVisible();
-                		}
-                } catch (Exception ex) {
-                        Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
-        if (keyCode == KeyEvent.VK_U) {
-                
-                try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] B5q");
-                    String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[6];
-            		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, frequence, harmoniquesChoisies);
-                       rendreVisible();
-                		}
-                } catch (Exception ex) {
-                        Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
-        if (keyCode == KeyEvent.VK_A) {
-               
-                try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] C6q");
-                    String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[7];
-            		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, frequence, harmoniquesChoisies);
-                       rendreVisible();
-                		}
-                } catch (Exception ex) {
-                        Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
         if (keyCode == KeyEvent.VK_S) {
                
                 try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] D6q");
-                    String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[8];
-            		if(AfficherGraphe.isSelected()){
+                	   player.play("I["+Constants.STRINGS[instruSelec]+"] C"+octaveAct+duree);
+                       String instrument = Constants.STRINGS[instruSelec];
+               		   double frequence =i.f[0+(Integer.parseInt(octaveAct)-4)*12];
+               		   if(AfficherGraphe.isSelected()){
                        rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
-            		}
-                    
+                		}
                 } catch (Exception ex) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -362,10 +285,10 @@ public void keyPressed(KeyEvent e) {
         if (keyCode == KeyEvent.VK_D) {
                 
                 try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] E6q");
-                    String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[9];
-            		if(AfficherGraphe.isSelected()){
+                	 player.play("I["+Constants.STRINGS[instruSelec]+"] D"+octaveAct+duree);
+                     String instrument = Constants.STRINGS[instruSelec];
+             		 double frequence =i.f[2+(Integer.parseInt(octaveAct)-4)*12];
+             		if(AfficherGraphe.isSelected()){
                        rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
                 		}
@@ -376,37 +299,9 @@ public void keyPressed(KeyEvent e) {
         if (keyCode == KeyEvent.VK_F) {
                 
                 try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] F6q");
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] E"+octaveAct+duree);
                     String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[10];
-            		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, frequence, harmoniquesChoisies);
-                       rendreVisible();
-                		}
-                } catch (Exception ex) {
-                        Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
-        if (keyCode == KeyEvent.VK_G) {
-               
-                try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] G6q");
-                    String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[11];
-            		if(AfficherGraphe.isSelected()){
-                       rafraichir(instrument, frequence, harmoniquesChoisies);
-                       rendreVisible();
-                		}
-                } catch (Exception ex) {
-                        Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
-        if (keyCode == KeyEvent.VK_H) {
-                
-                try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] A6q");
-                    String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[12];
+            		double frequence =i.f[4+(Integer.parseInt(octaveAct)-4)*12];
             		if(AfficherGraphe.isSelected()){
                        rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
@@ -418,9 +313,9 @@ public void keyPressed(KeyEvent e) {
         if (keyCode == KeyEvent.VK_J) {
                
                 try {
-                	player.play("I["+Constants.STRINGS[instruSelec]+"] B6q");
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] F"+octaveAct+duree);
                     String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[13];
+            		double frequence =i.f[5+(Integer.parseInt(octaveAct)-4)*12];
             		if(AfficherGraphe.isSelected()){
                        rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
@@ -429,21 +324,120 @@ public void keyPressed(KeyEvent e) {
                         Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
                 }
         }
-       
         if (keyCode == KeyEvent.VK_K) {
-            
-            try {
-            	   player.play("I["+Constants.STRINGS[instruSelec]+"] C7q");
-                   String instrument = Constants.STRINGS[instruSelec];
-           		   double frequence =i.f[14];
-           		if(AfficherGraphe.isSelected()){
+                
+                try {
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] G"+octaveAct+duree);
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[7+(Integer.parseInt(octaveAct)-4)*12];
+            		if(AfficherGraphe.isSelected()){
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
+                		}
+                } catch (Exception ex) {
+                        Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+        if (keyCode == KeyEvent.VK_L) {
+               
+                try {
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] A"+octaveAct+duree);
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[9+(Integer.parseInt(octaveAct)-4)*12];
+            		if(AfficherGraphe.isSelected()){
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
+                		}
+                } catch (Exception ex) {
+                        Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+        if (keyCode == KeyEvent.VK_SEMICOLON) {
+                
+                try {
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] B"+octaveAct+duree);
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[11+(Integer.parseInt(octaveAct)-4)*12];
+            		if(AfficherGraphe.isSelected()){
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
+                		}
+                } catch (Exception ex) {
+                        Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+        if (keyCode == KeyEvent.VK_E) {
+               
+                try {
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] C#"+octaveAct+duree);
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[1+(Integer.parseInt(octaveAct)-4)*12];
+            		if(AfficherGraphe.isSelected()){
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
+                		}
+                } catch (Exception ex) {
+                        Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+        if (keyCode == KeyEvent.VK_R) {
+               
+                try {
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] D#"+octaveAct+duree);
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[3+(Integer.parseInt(octaveAct)-4)*12];
+            		if(AfficherGraphe.isSelected()){
                        rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
             		}
-            } catch (Exception ex) {
-                    Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
-            }
-    }
+                    
+                } catch (Exception ex) {
+                        Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+        if (keyCode == KeyEvent.VK_I) {
+                
+                try {
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] F#"+octaveAct+duree);
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[6+(Integer.parseInt(octaveAct)-4)*12];
+            		if(AfficherGraphe.isSelected()){
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
+                		}
+                } catch (Exception ex) {
+                        Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+        if (keyCode == KeyEvent.VK_O) {
+                
+                try {
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] G#"+octaveAct+duree);
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[8+(Integer.parseInt(octaveAct)-4)*12];
+            		if(AfficherGraphe.isSelected()){
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
+                		}
+                } catch (Exception ex) {
+                        Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+        if (keyCode == KeyEvent.VK_P) {
+               
+                try {
+                	player.play("I["+Constants.STRINGS[instruSelec]+"] A#"+octaveAct+duree);
+                    String instrument = Constants.STRINGS[instruSelec];
+            		double frequence =i.f[10+(Integer.parseInt(octaveAct)-4)*12];
+            		if(AfficherGraphe.isSelected()){
+                       rafraichir(instrument, frequence, harmoniquesChoisies);
+                       rendreVisible();
+                		}
+                } catch (Exception ex) {
+                        Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+        
     }
 
 
@@ -465,11 +459,6 @@ public void keyPressed(KeyEvent e) {
 
     // pour que chaque composant ait le m¡§me instrument s¡§lectionn¡§, utiliser cette m¡§thode
     // --- A REMPLIR POUR LES AUTRES PANELS ---
-    private void setInstruSelec(int instrument){
-        this.instruSelec = instrument;
-        this.panelInstru.setInstruSelec(instrument);
-        this.repaint();
-    }
 
     private LinkedList<Integer> getSelectedNames(JCheckBox[] boxes) {
 
@@ -494,5 +483,36 @@ public void keyPressed(KeyEvent e) {
         u.refresh(instrument, frequence, harmoniquesChoisies);
         s.refresh(instrument, frequence);
     }
+    
+    private void setInstruSelec(int instrument){
+        this.instruSelec = instrument;
+        this.panelInstru.setInstruSelec(instrument);
+        this.repaint();
+    }
+    
+    private void setOctave(int numOctave){
+        octaveAct = String.valueOf(numOctave);
+    }
+
+    private void setDuree(int dureeint){
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i< dureeint; i++){
+            sb.append("q");
+        }
+        duree = sb.toString();
+    }
+
+    // pour que chaque composant ait le m¨ºme instrument s¨¦lectionn¨¦, utiliser cette m¨¦thode
+    // --- A REMPLIR POUR LES AUTRES PANELS ---
+    public void stateChanged(ChangeEvent e) {       // appelee quand on modif la valeur d'un slider a la souris
+        if (e.getSource() == sliderOctave){
+            setOctave(sliderOctave.getValue());
+
+        }else if (e.getSource() == sliderDuree){
+            setDuree(sliderDuree.getValue());
+        }
+        this.requestFocus();        // on perd le focus pour la fenetre apr¨¨s stateChanged -> le remet
+    }
+
 
 }
