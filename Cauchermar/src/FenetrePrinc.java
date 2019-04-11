@@ -1,4 +1,6 @@
 import javax.swing.*;
+
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -29,23 +31,24 @@ public class FenetrePrinc extends JFrame implements ActionListener,ChangeListene
 	double fi=0;
     protected int instruSelec=0, x=200, y=50, width = 800, height = 600, instruWidth, instruHeight;    // modifiables via options
     protected int dureeMin = 1, dureeMax = 10, dureeAct= 5;
-    protected int octaveMin=4, octaveMax=7;
+    protected int octaveMin=2, octaveMax=7;
     protected String octaveAct="5";
     protected JMenuBar menuBar;
-    protected JCheckBox[] GroupeHarmonique; 
     protected JMenu menuInstruments, menuOptions, submenuResolution, menuAbout, menuHarmoniques;
     protected JMenuItem itemFluteDePan, itemFluteABec, itemClarinette, itemHautbois, itemOrgue,
-            reso1000_600, reso600_400, itemInspi;
+    	reso1280_960, reso960_720, reso640_480,  itemInspi;
     protected PanelInstrument panelInstru;
-    protected JCheckBox AfficherGraphe;
-    protected JSlider sliderDuree, sliderOctave;
     protected JPanel mainPanel, panelOptions;
+    protected JCheckBox AfficherGraphe;
+    protected JCheckBox[] GroupeHarmonique; 
+    protected JSlider sliderDuree, sliderOctave;
+    protected JLabel labelDuree, labelOctave;
+    private String duree=String.valueOf(dureeAct);
     LinkedList<Integer> harmoniquesChoisies;
     protected Synthesis s;
     protected Analysis a;
     protected Unique u;
-    private String duree=String.valueOf(dureeAct);
-    protected JLabel labelDuree, labelOctave;
+    
    
     
     public FenetrePrinc() {
@@ -61,6 +64,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,ChangeListene
         this.instruHeight = 2*height/3;
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setResizable(false);
+        this.setFocusable(true);
 
         // panels
         this.panelInstru = new PanelInstrument();
@@ -71,10 +75,16 @@ public class FenetrePrinc extends JFrame implements ActionListener,ChangeListene
         this.mainPanel.add(this.panelInstru);
         this.setContentPane(this.mainPanel);
 
-      
+     // panel options
+        this.panelOptions = new JPanel();
+//        panelOptions.setLayout(null);
+        panelOptions.setBounds(instruWidth,0,width-instruWidth, instruHeight);
+        panelOptions.setBackground(Color.CYAN);
+        this.mainPanel.add(panelOptions);
+    
         labelDuree = new JLabel("Dur¨¦e ");
 //      labelDuree.setBounds((width-instruWidth)/2, 30, 100,50);
-      panelOptions.add(labelDuree);
+        panelOptions.add(labelDuree);
 
       sliderDuree = new JSlider(dureeMin,dureeMax,dureeAct);
       sliderDuree.setMajorTickSpacing(1);
@@ -154,7 +164,6 @@ public class FenetrePrinc extends JFrame implements ActionListener,ChangeListene
 
         //menuHarmoniques : selection d'harmoniques par checkbox
         menuHarmoniques = new JMenu("Harmoniques");
-
         GroupeHarmonique = new JCheckBox[15];
 
         for(int i = 0; i<GroupeHarmonique.length; i++){
@@ -174,13 +183,16 @@ public class FenetrePrinc extends JFrame implements ActionListener,ChangeListene
         AfficherGraphe.addActionListener(this);
         
         // resolution
-        submenuResolution = new JMenu("Resolution");
-        reso600_400 = new JMenuItem("600x400");
-        submenuResolution.add(reso600_400);
-        reso1000_600 = new JMenuItem("1000x600");
-        submenuResolution.add(reso1000_600);
-        reso1000_600.addActionListener(this);
-        reso600_400.addActionListener(this);
+        submenuResolution = new JMenu("R¨¦solution");
+        reso640_480 = new JMenuItem("640x480");
+        submenuResolution.add(reso640_480);
+        reso960_720 = new JMenuItem("960x720");
+        submenuResolution.add(reso960_720);
+        reso1280_960 = new JMenuItem("1280x960");
+        submenuResolution.add(reso1280_960);
+        reso1280_960.addActionListener(this);
+        reso960_720.addActionListener(this);
+        reso640_480.addActionListener(this);
         menuOptions.add(submenuResolution);
 
         // autres
@@ -235,12 +247,22 @@ public class FenetrePrinc extends JFrame implements ActionListener,ChangeListene
             harmoniquesChoisies = getSelectedNames(GroupeHarmonique);
         }
 
-        else if (source ==this.reso600_400){
-            this.setDim(600,400);
+        else if (source == this.itemOrgue){
+            System.out.println("Orgue");
+            this.setInstruSelec(Constants.ORGUE);
         }
 
-        else if (source == this.reso1000_600){
-            this.setDim(1000,600);
+        // Resolutions : 1280*960 / 640*480 / 960*720
+        else if (source ==this.reso960_720){
+            this.setDim(960,720);
+        }
+
+        else if (source == this.reso1280_960){
+            this.setDim(1280,960);
+        }
+
+        else if (source == this.reso640_480){
+            this.setDim(640,480);
         }
 
         else if (source == this.itemInspi){
@@ -273,7 +295,7 @@ public void keyPressed(KeyEvent e) {
                 try {
                 	   player.play("I["+Constants.STRINGS[instruSelec]+"] C"+octaveAct+duree);
                        String instrument = Constants.STRINGS[instruSelec];
-               		   double frequence =i.f[0+(Integer.parseInt(octaveAct)-4)*12];
+               		   double frequence =i.f[0+(Integer.parseInt(octaveAct)-2)*12];
                		   if(AfficherGraphe.isSelected()){
                        rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
@@ -287,7 +309,7 @@ public void keyPressed(KeyEvent e) {
                 try {
                 	 player.play("I["+Constants.STRINGS[instruSelec]+"] D"+octaveAct+duree);
                      String instrument = Constants.STRINGS[instruSelec];
-             		 double frequence =i.f[2+(Integer.parseInt(octaveAct)-4)*12];
+             		 double frequence =i.f[2+(Integer.parseInt(octaveAct)-2)*12];
              		if(AfficherGraphe.isSelected()){
                        rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
@@ -301,7 +323,7 @@ public void keyPressed(KeyEvent e) {
                 try {
                 	player.play("I["+Constants.STRINGS[instruSelec]+"] E"+octaveAct+duree);
                     String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[4+(Integer.parseInt(octaveAct)-4)*12];
+            		double frequence =i.f[4+(Integer.parseInt(octaveAct)-2)*12];
             		if(AfficherGraphe.isSelected()){
                        rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
@@ -315,7 +337,7 @@ public void keyPressed(KeyEvent e) {
                 try {
                 	player.play("I["+Constants.STRINGS[instruSelec]+"] F"+octaveAct+duree);
                     String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[5+(Integer.parseInt(octaveAct)-4)*12];
+            		double frequence =i.f[5+(Integer.parseInt(octaveAct)-2)*12];
             		if(AfficherGraphe.isSelected()){
                        rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
@@ -329,7 +351,7 @@ public void keyPressed(KeyEvent e) {
                 try {
                 	player.play("I["+Constants.STRINGS[instruSelec]+"] G"+octaveAct+duree);
                     String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[7+(Integer.parseInt(octaveAct)-4)*12];
+            		double frequence =i.f[7+(Integer.parseInt(octaveAct)-2)*12];
             		if(AfficherGraphe.isSelected()){
                        rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
@@ -343,7 +365,7 @@ public void keyPressed(KeyEvent e) {
                 try {
                 	player.play("I["+Constants.STRINGS[instruSelec]+"] A"+octaveAct+duree);
                     String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[9+(Integer.parseInt(octaveAct)-4)*12];
+            		double frequence =i.f[9+(Integer.parseInt(octaveAct)-2)*12];
             		if(AfficherGraphe.isSelected()){
                        rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
@@ -357,7 +379,7 @@ public void keyPressed(KeyEvent e) {
                 try {
                 	player.play("I["+Constants.STRINGS[instruSelec]+"] B"+octaveAct+duree);
                     String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[11+(Integer.parseInt(octaveAct)-4)*12];
+            		double frequence =i.f[11+(Integer.parseInt(octaveAct)-2)*12];
             		if(AfficherGraphe.isSelected()){
                        rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
@@ -371,7 +393,7 @@ public void keyPressed(KeyEvent e) {
                 try {
                 	player.play("I["+Constants.STRINGS[instruSelec]+"] C#"+octaveAct+duree);
                     String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[1+(Integer.parseInt(octaveAct)-4)*12];
+            		double frequence =i.f[1+(Integer.parseInt(octaveAct)-2)*12];
             		if(AfficherGraphe.isSelected()){
                        rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
@@ -385,7 +407,7 @@ public void keyPressed(KeyEvent e) {
                 try {
                 	player.play("I["+Constants.STRINGS[instruSelec]+"] D#"+octaveAct+duree);
                     String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[3+(Integer.parseInt(octaveAct)-4)*12];
+            		double frequence =i.f[3+(Integer.parseInt(octaveAct)-2)*12];
             		if(AfficherGraphe.isSelected()){
                        rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
@@ -400,7 +422,7 @@ public void keyPressed(KeyEvent e) {
                 try {
                 	player.play("I["+Constants.STRINGS[instruSelec]+"] F#"+octaveAct+duree);
                     String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[6+(Integer.parseInt(octaveAct)-4)*12];
+            		double frequence =i.f[6+(Integer.parseInt(octaveAct)-2)*12];
             		if(AfficherGraphe.isSelected()){
                        rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
@@ -414,7 +436,7 @@ public void keyPressed(KeyEvent e) {
                 try {
                 	player.play("I["+Constants.STRINGS[instruSelec]+"] G#"+octaveAct+duree);
                     String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[8+(Integer.parseInt(octaveAct)-4)*12];
+            		double frequence =i.f[8+(Integer.parseInt(octaveAct)-2)*12];
             		if(AfficherGraphe.isSelected()){
                        rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
@@ -428,7 +450,7 @@ public void keyPressed(KeyEvent e) {
                 try {
                 	player.play("I["+Constants.STRINGS[instruSelec]+"] A#"+octaveAct+duree);
                     String instrument = Constants.STRINGS[instruSelec];
-            		double frequence =i.f[10+(Integer.parseInt(octaveAct)-4)*12];
+            		double frequence =i.f[10+(Integer.parseInt(octaveAct)-2)*12];
             		if(AfficherGraphe.isSelected()){
                        rafraichir(instrument, frequence, harmoniquesChoisies);
                        rendreVisible();
