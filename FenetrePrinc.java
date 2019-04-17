@@ -282,6 +282,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
                 }
+                else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -295,6 +296,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
                 }
+                else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -308,6 +310,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
                 }
+                else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -321,6 +324,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
                 }
+                else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -334,6 +338,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
                 }
+                else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -347,6 +352,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
                 }
+                else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -360,6 +366,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
                 }
+                else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -373,6 +380,8 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
                 }
+                else rendreInvisible();
+
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -386,6 +395,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
                 }
+                else rendreInvisible();
 
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -400,6 +410,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
                 }
+                else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -413,6 +424,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
                 }
+                else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -426,6 +438,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
                 }
+                else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -495,6 +508,13 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
         s.setVisible(true);
         a.setVisible(true);
         u.setVisible(true);
+        this.setVisible(true);
+    }
+
+    private void rendreInvisible(){
+        s.setVisible(false);
+        a.setVisible(false);
+        u.setVisible(false);
         this.setVisible(true);
     }
 
