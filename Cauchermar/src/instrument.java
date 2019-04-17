@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 public class instrument{
 	String nom;
-    double[] f=new double[15];
-    double df=1.122462048;
+    double[] f=new double[71];
+    double df=1.059463094;
     List<Double> amplitudeTable = new ArrayList<>();
     //ce tableau contiendra les harmoniques avec leurs amplitudes pond¡§r¡§s
     //les harmoniques sont obtenus par mutltiple de f fondamental
@@ -50,8 +50,8 @@ public class instrument{
             }
             
            
-           f[0]=440;
-           for(int i=1;i<15;i++){
+           f[0]=65.5;
+           for(int i=1;i<f.length;i++){
 			   f[i]=f[i-1]*df;
 			  }
 		}
