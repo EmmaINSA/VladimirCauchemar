@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.util.LinkedList;
 
 public class MainFourier extends JPanel {
 
@@ -36,7 +35,7 @@ public class MainFourier extends JPanel {
 
 public MainFourier(String instrument, double frequence) {
 
-    instrument instru = new instrument(instrument);
+    Instrument instru = new Instrument(instrument);
 
     List<Double> plot = new ArrayList<>();
 

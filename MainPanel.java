@@ -37,7 +37,7 @@ public MainPanel(String instrument, double frequence) {
 
     int nbPoint = (int)(2500000/frequence);
 
-    instrument instru = new instrument(instrument);
+    Instrument instru = new Instrument(instrument);
 
     List<Double> plot = new ArrayList<>();
 

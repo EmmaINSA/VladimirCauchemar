@@ -39,7 +39,7 @@ public class MainPanel2 extends JPanel {
 
         int nbPoint = (int) (2500000 / frequence);
 
-        instrument instru = new instrument(instrument);
+        Instrument instru = new Instrument(instrument);
 
         List<List<Double>> plot = new ArrayList<List<Double>>(harmoniques.size());
 

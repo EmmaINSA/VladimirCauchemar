@@ -14,17 +14,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.LinkedList;
 import javax.swing.JCheckBox;
 //import org.jfugue.player.Player;
-import org.jfugue.player.Player;
+//import org.jfugue.player.Player;
 
 /*
 * La morale de cette histoire :
@@ -34,8 +31,7 @@ import org.jfugue.player.Player;
 
 public class FenetrePrinc extends JFrame implements ActionListener, ChangeListener, KeyListener{
 
-	instrument i=new instrument("Flute");
-	double fi=0;
+	Instrument i=new Instrument("Flute");
     protected int instruSelec=0, x=200, y=50, width = 960, height = 720, instruWidth, instruHeight;    // modifiables via options
     protected int dureeMin = 1, dureeMax = 10, dureeAct= 5;
     protected int octaveMin=1, octaveMax=7;
@@ -71,7 +67,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
         this.setResizable(false);
         this.setFocusable(true);
 
-        // panel affichage instrument
+        // panel affichage Instrument
         this.panelInstru = new PanelInstrument();
         panelInstru.setDim(instruWidth, instruHeight);
         this.mainPanel = new JPanel();
@@ -267,7 +263,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
 
         else if (source == this.itemInspi){
             try {
-                java.awt.Desktop.getDesktop().browse(new URI("https://youtu.be/hpjV962DLWs"));
+                Desktop.getDesktop().browse(new URI("https://youtu.be/hpjV962DLWs"));
             }catch (URISyntaxException e2){
                 e2.printStackTrace();
             }catch (IOException e1){
@@ -531,7 +527,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
         duree = sb.toString();
     }
 
-    // pour que chaque composant ait le même instrument sélectionné, utiliser cette méthode
+    // pour que chaque composant ait le même Instrument sélectionné, utiliser cette méthode
     // --- A REMPLIR POUR LES AUTRES PANELS ---
     private void setInstruSelec(int instrument){
         this.instruSelec = instrument;
@@ -541,17 +537,20 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
 
     private LinkedList<Integer> getSelectedNames(JCheckBox[] boxes) {
 
-        LinkedList<Integer> SelectedElements =new LinkedList<Integer>();
+        LinkedList<Integer> SelectedElements = new LinkedList<Integer>();
 
-        for(int i = 0; i< boxes.length; i++)
-            if(boxes[i].isSelected())
+        for (int i = 0; i < boxes.length; i++)
+            if (boxes[i].isSelected())
                 SelectedElements.add(i);
+
+        return SelectedElements;
+    }
+
     @Override
     public void stateChanged(ChangeEvent e) {       // appelee quand on modif la valeur d'un slider a la souris
         if (e.getSource() == sliderOctave){
             setOctave(sliderOctave.getValue());
 
-        return SelectedElements;
         }else if (e.getSource() == sliderDuree){
             setDuree(sliderDuree.getValue());
         }
