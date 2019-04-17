@@ -82,7 +82,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
 
         // widgets
         labelDuree = new JLabel("Duree d'une note (a def)");
-        labelDuree.setBounds((width-instruWidth)/2- 50, 10, width-instruWidth,50);
+        labelDuree.setBounds((width-instruWidth)/2- 60, 10, width-instruWidth,50);
         panelOptions.add(labelDuree);
 
         sliderDuree = new JSlider(dureeMin,dureeMax,dureeAct);
@@ -96,7 +96,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
         this.panelOptions.add(sliderDuree);
 
         labelOctave = new JLabel("N° de l'octave jouee");
-        labelOctave.setBounds((width-instruWidth)/2 - 70, 60 + height/10 + 20, width-instruWidth, 50);
+        labelOctave.setBounds((width-instruWidth)/2 - 60, 60 + height/10 + 20, width-instruWidth, 50);
         panelOptions.add(labelOctave);
 
         sliderOctave = new JSlider(octaveMin, octaveMax, Integer.valueOf(octaveAct));
@@ -142,8 +142,6 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
         itemFluteABec = new JMenuItem("Flute a bec");
         menuInstruments.add(itemFluteABec);
         itemFluteABec.addActionListener(this);
-
-        menuInstruments.addSeparator();      // pour separer vents & cordes ?
 
         // clarinette
         itemClarinette = new JMenuItem("Clarinette");
@@ -450,9 +448,9 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
             this.mainPanel.setBounds(0, 0, width, height);
 
             // widgets
-            labelDuree.setBounds((width-instruWidth)/2- 50, 10, width-instruWidth,50);
+            labelDuree.setBounds((width-instruWidth)/2- 60, 10, width-instruWidth,50);
             sliderDuree.setBounds(30,60,width-instruWidth-60, height/10);
-            labelOctave.setBounds((width-instruWidth)/2 - 70, 60 + height/10 + 20, width-instruWidth, 50);
+            labelOctave.setBounds((width-instruWidth)/2 - 60, 60 + height/10 + 20, width-instruWidth, 50);
             sliderOctave.setBounds(30,60 + height/10 + 20*2 + 50,width-instruWidth-60, height/10);
             this.setBounds(x, y, width, height);
         }
@@ -465,7 +463,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
     private void setDuree(int dureeint){
         StringBuilder sb = new StringBuilder();
         for (int i=0; i< dureeint; i++){
-            sb.append("q");
+            sb.append("i");     // i = 1/8s
         }
         duree = sb.toString();
     }
