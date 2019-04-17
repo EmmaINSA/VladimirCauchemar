@@ -75,14 +75,14 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
 
         // panel options
         this.panelOptions = new JPanel();
-//        panelOptions.setLayout(null);
+        panelOptions.setLayout(null);
         panelOptions.setBounds(instruWidth,0,width-instruWidth, instruHeight);
         panelOptions.setBackground(Color.CYAN);
         this.mainPanel.add(panelOptions);
 
         // widgets
-        labelDuree = new JLabel("Durée ");
-//        labelDuree.setBounds((width-instruWidth)/2, 30, 100,50);
+        labelDuree = new JLabel("Duree d'une note (a def)");
+        labelDuree.setBounds((width-instruWidth)/2- 50, 10, width-instruWidth,50);
         panelOptions.add(labelDuree);
 
         sliderDuree = new JSlider(dureeMin,dureeMax,dureeAct);
@@ -92,9 +92,11 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
         sliderDuree.setPaintLabels(true);
         sliderDuree.setValueIsAdjusting(true);
         sliderDuree.addChangeListener(this);
+        sliderDuree.setBounds(30,60,width-instruWidth-60, height/10);
         this.panelOptions.add(sliderDuree);
 
-        labelOctave = new JLabel("Octave ");
+        labelOctave = new JLabel("N° de l'octave jouee");
+        labelOctave.setBounds((width-instruWidth)/2 - 70, 60 + height/10 + 20, width-instruWidth, 50);
         panelOptions.add(labelOctave);
 
         sliderOctave = new JSlider(octaveMin, octaveMax, Integer.valueOf(octaveAct));
@@ -104,6 +106,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
         sliderOctave.setPaintTicks(true);
         sliderOctave.setValueIsAdjusting(true);
         sliderOctave.addChangeListener(this);
+        sliderOctave.setBounds(30,60 + height/10 + 20*2 + 50,width-instruWidth-60, height/10);
         panelOptions.add(sliderOctave);
 
         this.setInstruSelec(0);
@@ -281,8 +284,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                 if(afficherGraphe.isSelected()){
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
-                }
-                else rendreInvisible();
+                }else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -295,8 +297,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                 if(afficherGraphe.isSelected()){
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
-                }
-                else rendreInvisible();
+                }else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -309,8 +310,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                 if(afficherGraphe.isSelected()){
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
-                }
-                else rendreInvisible();
+                }else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -323,8 +323,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                 if(afficherGraphe.isSelected()){
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
-                }
-                else rendreInvisible();
+                }else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -337,8 +336,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                 if(afficherGraphe.isSelected()){
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
-                }
-                else rendreInvisible();
+                }else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -351,8 +349,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                 if(afficherGraphe.isSelected()){
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
-                }
-                else rendreInvisible();
+                }else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -365,8 +362,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                 if(afficherGraphe.isSelected()){
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
-                }
-                else rendreInvisible();
+                }else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -379,9 +375,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                 if(afficherGraphe.isSelected()){
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
-                }
-                else rendreInvisible();
-
+                }else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -394,8 +388,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                 if(afficherGraphe.isSelected()){
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
-                }
-                else rendreInvisible();
+                }else rendreInvisible();
 
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
@@ -409,8 +402,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                 if(afficherGraphe.isSelected()){
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
-                }
-                else rendreInvisible();
+                }else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -423,8 +415,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                 if(afficherGraphe.isSelected()){
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
-                }
-                else rendreInvisible();
+                }else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -437,8 +428,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                 if(afficherGraphe.isSelected()){
                     rafraichir(instrument, frequence, harmoniquesChoisies);
                     rendreVisible();
-                }
-                else rendreInvisible();
+                }else rendreInvisible();
             } catch (Exception ex) {
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -450,6 +440,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
 
     private void setDim(int width, int height){
         if (this.width != width && this.height != height) {
+            // fenetre et panels
             this.width = width;
             this.height = height;
             this.instruWidth = 2 * width / 3;
@@ -457,8 +448,13 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
             this.panelInstru.setDim(instruWidth, instruHeight);
             this.panelOptions.setBounds(instruWidth, 0, width-instruWidth,instruHeight);
             this.mainPanel.setBounds(0, 0, width, height);
+
+            // widgets
+            labelDuree.setBounds((width-instruWidth)/2- 50, 10, width-instruWidth,50);
+            sliderDuree.setBounds(30,60,width-instruWidth-60, height/10);
+            labelOctave.setBounds((width-instruWidth)/2 - 70, 60 + height/10 + 20, width-instruWidth, 50);
+            sliderOctave.setBounds(30,60 + height/10 + 20*2 + 50,width-instruWidth-60, height/10);
             this.setBounds(x, y, width, height);
-//        System.out.println("SetDim done");
         }
     }
 
@@ -474,8 +470,6 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
         duree = sb.toString();
     }
 
-    // pour que chaque composant ait le même Instrument sélectionné, utiliser cette méthode
-    // --- A REMPLIR POUR LES AUTRES PANELS ---
     private void setInstruSelec(int instrument){
         this.instruSelec = instrument;
         this.panelInstru.setInstruSelec(instrument);
