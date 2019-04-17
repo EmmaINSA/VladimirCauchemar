@@ -31,47 +31,50 @@ import java.util.LinkedList;
 
 public class MainPanel2 extends JPanel {
 
-//===========================================================================================================================
-// Constructeur
-//===========================================================================================================================
+    //===========================================================================================================================
+    // Constructeur
+    //===========================================================================================================================
 
-public MainPanel2(String instrument, double frequence, LinkedList<Integer> harmoniques) {
+    public MainPanel2(String instrument, double frequence, LinkedList<Integer> harmoniques) {
 
-    int nbPoint = (int)(2500000/frequence);
+        int nbPoint = (int) (2500000 / frequence);
 
-    instrument instru = new instrument(instrument);
+        instrument instru = new instrument(instrument);
 
-    List<List<Double>> plot = new ArrayList<List<Double>>(harmoniques.size());
+        List<List<Double>> plot = new ArrayList<List<Double>>(harmoniques.size());
 
-    String rang = 1+"";
+        String rang = 1 + "";
 
-        for (int l = 0; l<harmoniques.size(); l++){
+        for (int l = 0; l < harmoniques.size(); l++) {
             plot.add(new ArrayList<Double>());
-            for (int k = 0; k<nbPoint; k++){
-            plot.get(l).add(instru.simpleFunction(frequence,k,harmoniques.get(l)));
+            for (int k = 0; k < nbPoint; k++) {
+                plot.get(l).add(instru.simpleFunction(frequence, k, harmoniques.get(l)));
             }
         }
 
-    JPanel graphPanel = new GraphPanel(plot,frequence,harmoniques);
+        JPanel graphPanel = new GraphPanel(plot, frequence, harmoniques);
 
-    setLayout(new BorderLayout());
+        setLayout(new BorderLayout());
 
-    JLabel title = new JLabel("");
+        JLabel title = new JLabel("");
 
-    title = new JLabel("Signal decompose");
+        title = new JLabel("Signal decompose");
 
-    title.setFont(new Font("Arial", Font.BOLD, 25));
-    title.setHorizontalAlignment(JLabel.CENTER);
+        title.setFont(new Font("Arial", Font.BOLD, 25));
+        title.setHorizontalAlignment(JLabel.CENTER);
 
-    VerticalPanel vertPanel = new VerticalPanel();
+        VerticalPanel vertPanel = new VerticalPanel();
 
-    HorizontalPanel horiPanel = new HorizontalPanel();
+        HorizontalPanel horiPanel = new HorizontalPanel();
 
-    add(title, BorderLayout.NORTH);
-    add(horiPanel, BorderLayout.SOUTH);
-    add(vertPanel, BorderLayout.WEST);
-    add(graphPanel, BorderLayout.CENTER);
+        add(title, BorderLayout.NORTH);
+        add(horiPanel, BorderLayout.SOUTH);
+        add(vertPanel, BorderLayout.WEST);
+        add(graphPanel, BorderLayout.CENTER);
+    }
+
 }
+
 
 //===========================================================================================================================
 // Sous-panel pour l'axe des ordonnee
@@ -113,6 +116,8 @@ class VerticalPanel extends JPanel {
 
 }
 
+
+
 //===========================================================================================================================
 // Sous-panel pour l'axe des abscisses
 //===========================================================================================================================
@@ -145,11 +150,13 @@ class HorizontalPanel extends JPanel {
 
 }
 
+
+
 //===========================================================================================================================
 // Sous-panel pour le graphique
 //===========================================================================================================================
 
-static class GraphPanel extends JPanel {
+class GraphPanel extends JPanel {
 
     private int width = 800;
     private int heigth = 400;
@@ -304,14 +311,12 @@ static class GraphPanel extends JPanel {
         return new Dimension(width, heigth);
     }
 
-        public void drawRotate(Graphics2D gg, double x, double y, int angle, String text) {
-            gg.translate((float) x, (float) y);
-            gg.rotate(Math.toRadians(angle));
-            gg.drawString(text, 0, 0);
-            gg.rotate(-Math.toRadians(angle));
-            gg.translate(-(float) x, -(float) y);
-        }
-
+    public void drawRotate(Graphics2D gg, double x, double y, int angle, String text) {
+        gg.translate((float) x, (float) y);
+        gg.rotate(Math.toRadians(angle));
+        gg.drawString(text, 0, 0);
+        gg.rotate(-Math.toRadians(angle));
+        gg.translate(-(float) x, -(float) y);
     }
 
-}
+    }

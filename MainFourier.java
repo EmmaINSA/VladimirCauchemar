@@ -40,9 +40,7 @@ public MainFourier(String instrument, double frequence) {
 
     List<Double> plot = new ArrayList<>();
 
-    String rang = 1+"";
-
-        for (int k = 0; k<15; k++){
+    for (int k = 0; k<15; k++){
         plot.add(instru.amplitudeTable.get(k));
         }
 
