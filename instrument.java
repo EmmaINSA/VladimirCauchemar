@@ -14,8 +14,8 @@ import java.util.Objects;
 
 public class Instrument {
 	String nom;
-    double[] f=new double[15];
-    double df=1.122462048;
+    double[] f=new double[72];
+    double df=1.059463094;
     List<Double> amplitudeTable = new ArrayList<>();
     //ce tableau contiendra les harmoniques avec leurs amplitudes ponderes
     //les harmoniques sont obtenus par mutltiple de f fondamental
@@ -61,12 +61,11 @@ public class Instrument {
                 amplitudeTable.add(aTempTable);
             }
         }
-            
-           
-       f[0]=440;
-       for(int i=1;i<15;i++){
-           f[i]=f[i-1]*df;
-       }
+
+        f[0]=65.5;
+        for(int i=1;i<f.length;i++){
+            f[i]=f[i-1]*df;
+        }
 
     }
     
