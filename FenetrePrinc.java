@@ -6,18 +6,25 @@
 
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.LinkedList;
 import javax.swing.JCheckBox;
 //import org.jfugue.player.Player;
+import org.jfugue.player.Player;
 
 /*
 * La morale de cette histoire :
@@ -25,24 +32,30 @@ import javax.swing.JCheckBox;
 * Grand maitre anonyme 2019
 */
 
-public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
+public class FenetrePrinc extends JFrame implements ActionListener, ChangeListener, KeyListener{
 
 	instrument i=new instrument("Flute");
 	double fi=0;
     protected int instruSelec=0, x=200, y=50, width = 960, height = 720, instruWidth, instruHeight;    // modifiables via options
+    protected int dureeMin = 1, dureeMax = 10, dureeAct= 5;
+    protected int octaveMin=1, octaveMax=7;
+    protected String octaveAct="5";
     protected JMenuBar menuBar;
     protected JCheckBox[] GroupeHarmonique; 
     protected JMenu menuInstruments, menuOptions, submenuResolution, menuAbout, menuHarmoniques;
     protected JMenuItem itemFluteDePan, itemFluteABec, itemClarinette, itemHautbois, itemOrgue,
-        reso1280_960, reso960_720, reso640_480, itemInspi;
+            reso1280_960, reso960_720, reso640_480,  itemInspi;
     protected PanelInstrument panelInstru;
-    protected JPanel mainPanel;
+    protected JPanel mainPanel, panelOptions;
+    protected JSlider sliderDuree, sliderOctave;
+    protected JLabel labelDuree, labelOctave;
+    private String duree=String.valueOf(dureeAct);
     protected JCheckBox AfficherGraphe;
     protected LinkedList<Integer> harmoniquesChoisies;    
     protected Synthesis s;
     protected Analysis a;
     protected Unique u;
-    
+
     public FenetrePrinc() {
         super("Simulateur d'instruments a vent");
         init();
@@ -56,8 +69,9 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         this.instruHeight = 2*height/3;
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setResizable(false);
+        this.setFocusable(true);
 
-        // panels
+        // panel affichage instrument
         this.panelInstru = new PanelInstrument();
         panelInstru.setDim(instruWidth, instruHeight);
         this.mainPanel = new JPanel();
@@ -65,6 +79,39 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         this.mainPanel.setBounds(0,0,width,height);
         this.mainPanel.add(this.panelInstru);
         this.setContentPane(this.mainPanel);
+
+        // panel options
+        this.panelOptions = new JPanel();
+//        panelOptions.setLayout(null);
+        panelOptions.setBounds(instruWidth,0,width-instruWidth, instruHeight);
+        panelOptions.setBackground(Color.CYAN);
+        this.mainPanel.add(panelOptions);
+
+        // widgets
+        labelDuree = new JLabel("Durée ");
+//        labelDuree.setBounds((width-instruWidth)/2, 30, 100,50);
+        panelOptions.add(labelDuree);
+
+        sliderDuree = new JSlider(dureeMin,dureeMax,dureeAct);
+        sliderDuree.setMajorTickSpacing(1);
+        sliderDuree.setMinorTickSpacing(1);
+        sliderDuree.setPaintTicks(true);
+        sliderDuree.setPaintLabels(true);
+        sliderDuree.setValueIsAdjusting(true);
+        sliderDuree.addChangeListener(this);
+        this.panelOptions.add(sliderDuree);
+
+        labelOctave = new JLabel("Octave ");
+        panelOptions.add(labelOctave);
+
+        sliderOctave = new JSlider(octaveMin, octaveMax, Integer.valueOf(octaveAct));
+        sliderOctave.setMajorTickSpacing(1);
+        sliderOctave.setMinorTickSpacing(1);
+        sliderOctave.setPaintLabels(true);
+        sliderOctave.setPaintTicks(true);
+        sliderOctave.setValueIsAdjusting(true);
+        sliderOctave.addChangeListener(this);
+        panelOptions.add(sliderOctave);
 
         this.setInstruSelec(0);
 
@@ -83,7 +130,6 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
     private void menuBar(){
 
         menuBar = new JMenuBar();
-
 
         //menuInstruments : comme "Fichier", avec des sous-composants
         menuInstruments = new JMenu("Instruments");
@@ -163,24 +209,20 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
 
         this.setJMenuBar(menuBar);
         
-        
-
     }
 
-
+    @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
 
         if (source == this.itemFluteABec){
             System.out.println("Flute a bec");
             this.setInstruSelec(Constants.FLUTEABEC);
-
         }
 
         else if (source == this.itemFluteDePan){
             System.out.println("Flute de pan");
             this.setInstruSelec(Constants.FLUTEDEPAN);
-
         }
 
         else if (source == this.itemClarinette){
@@ -237,14 +279,12 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
             System.out.println("Pas d'action specifiee");
         }
     }
-    
-    public void keyTyped(KeyEvent e) {
-            
-    }
 
-    
 
-public void keyPressed(KeyEvent e) {
+    public void keyTyped(KeyEvent e) {}
+
+
+    public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
 		// player = new Player();
 
@@ -459,12 +499,11 @@ public void keyPressed(KeyEvent e) {
             } catch (Exception ex) {
                     Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
-    }
+        }
     }
 
 
-    public void keyReleased(KeyEvent e) {
-		}
+    public void keyReleased(KeyEvent e) {}
 
     private void setDim(int width, int height){
         if (this.width != width && this.height != height) {
@@ -473,13 +512,26 @@ public void keyPressed(KeyEvent e) {
             this.instruWidth = 2 * width / 3;
             this.instruHeight = 2 * height / 3;
             this.panelInstru.setDim(instruWidth, instruHeight);
+            this.panelOptions.setBounds(instruWidth, 0, width-instruWidth,instruHeight);
             this.mainPanel.setBounds(0, 0, width, height);
             this.setBounds(x, y, width, height);
 //        System.out.println("SetDim done");
         }
     }
 
-    // pour que chaque composant ait le m��me instrument s��lectionn��, utiliser cette m��thode
+    private void setOctave(int numOctave){
+        octaveAct = String.valueOf(numOctave);
+    }
+
+    private void setDuree(int dureeint){
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i< dureeint; i++){
+            sb.append("q");
+        }
+        duree = sb.toString();
+    }
+
+    // pour que chaque composant ait le même instrument sélectionné, utiliser cette méthode
     // --- A REMPLIR POUR LES AUTRES PANELS ---
     private void setInstruSelec(int instrument){
         this.instruSelec = instrument;
@@ -494,8 +546,16 @@ public void keyPressed(KeyEvent e) {
         for(int i = 0; i< boxes.length; i++)
             if(boxes[i].isSelected())
                 SelectedElements.add(i);
+    @Override
+    public void stateChanged(ChangeEvent e) {       // appelee quand on modif la valeur d'un slider a la souris
+        if (e.getSource() == sliderOctave){
+            setOctave(sliderOctave.getValue());
 
         return SelectedElements;
+        }else if (e.getSource() == sliderDuree){
+            setDuree(sliderDuree.getValue());
+        }
+        this.requestFocus();        // on perd le focus pour la fenetre après stateChanged -> le remet
     }
 
     private void rendreVisible(){
