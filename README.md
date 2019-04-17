@@ -18,3 +18,6 @@ Les étapes nécessaires au bon fonctionnement du projet sont les suivantes :
 	- installez la bibliothèque JFugue, disponible à l'adresse suivante : http://www.jfugue.org/download.html (version utilisée : 5.0.9)
 	- décompressez tous les fichiers contenus dans l'archive du projet dans un même dossier
 	- compilez et exécutez
+
+NB : Si un message d'erreur tel que celui qui suit apparaît dans la console lors de l'exécution, ce n'est pas un problème pour notre programme.
+WARNING: Could not open/create prefs root node Software\JavaSoft\Prefs at root 0x80000002. Windows RegCreateKeyEx(...) returned error code 5.
