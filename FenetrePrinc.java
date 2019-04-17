@@ -29,12 +29,12 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
 
 	instrument i=new instrument("Flute");
 	double fi=0;
-    protected int instruSelec=0, x=200, y=50, width = 800, height = 600, instruWidth, instruHeight;    // modifiables via options
+    protected int instruSelec=0, x=200, y=50, width = 960, height = 720, instruWidth, instruHeight;    // modifiables via options
     protected JMenuBar menuBar;
     protected JCheckBox[] GroupeHarmonique; 
     protected JMenu menuInstruments, menuOptions, submenuResolution, menuAbout, menuHarmoniques;
     protected JMenuItem itemFluteDePan, itemFluteABec, itemClarinette, itemHautbois, itemOrgue,
-            reso1000_600, reso600_400, itemInspi;
+        reso1280_960, reso960_720, reso640_480, itemInspi;
     protected PanelInstrument panelInstru;
     protected JPanel mainPanel;
     protected JCheckBox AfficherGraphe;
@@ -44,7 +44,7 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
     protected Unique u;
     
     public FenetrePrinc() {
-        super("Simulateur d'instruments ¨a vent");
+        super("Simulateur d'instruments a vent");
         init();
     }
 
@@ -99,8 +99,8 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         itemFluteDePan.addActionListener(this);
 
         // flute a bec
-        itemFluteABec = new JMenuItem("Flute ¨a bec");
-//        itemFluteABec.getAccessibleContext().setAccessibleDescription("Flute ¨a bec pas encore dispo");
+        itemFluteABec = new JMenuItem("Flute a bec");
+//        itemFluteABec.getAccessibleContext().setAccessibleDescription("Flute a bec pas encore dispo");
         menuInstruments.add(itemFluteABec);
         itemFluteABec.addActionListener(this);
 
@@ -140,19 +140,22 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
         AfficherGraphe = new JCheckBox("Afficher les Graphes");
         menuOptions.add(AfficherGraphe);
         AfficherGraphe.addActionListener(this);
-        
+
         // resolution
         submenuResolution = new JMenu("Resolution");
-        reso600_400 = new JMenuItem("600x400");
-        submenuResolution.add(reso600_400);
-        reso1000_600 = new JMenuItem("1000x600");
-        submenuResolution.add(reso1000_600);
-        reso1000_600.addActionListener(this);
-        reso600_400.addActionListener(this);
+        reso640_480 = new JMenuItem("640x480");
+        submenuResolution.add(reso640_480);
+        reso960_720 = new JMenuItem("960x720");
+        submenuResolution.add(reso960_720);
+        reso1280_960 = new JMenuItem("1280x960");
+        submenuResolution.add(reso1280_960);
+        reso1280_960.addActionListener(this);
+        reso960_720.addActionListener(this);
+        reso640_480.addActionListener(this);
         menuOptions.add(submenuResolution);
 
         // autres
-        menuAbout = new JMenu("About");
+        menuAbout = new JMenu("A propos");
         itemInspi = new JMenuItem("Inspiration");
         itemInspi.addActionListener(this);
         menuAbout.add(itemInspi);
@@ -207,12 +210,17 @@ public class FenetrePrinc extends JFrame implements ActionListener,KeyListener{
             harmoniquesChoisies = getSelectedNames(GroupeHarmonique);
         }
 
-        else if (source ==this.reso600_400){
-            this.setDim(600,400);
+        // Resolutions : 1280*960 / 640*480 / 960*720
+        else if (source ==this.reso960_720){
+            this.setDim(960,720);
         }
 
-        else if (source == this.reso1000_600){
-            this.setDim(1000,600);
+        else if (source == this.reso1280_960){
+            this.setDim(1280,960);
+        }
+
+        else if (source == this.reso640_480){
+            this.setDim(640,480);
         }
 
         else if (source == this.itemInspi){
@@ -471,7 +479,7 @@ public void keyPressed(KeyEvent e) {
         }
     }
 
-    // pour que chaque composant ait le m¨ºme instrument s¨¦lectionn¨¦, utiliser cette m¨¦thode
+    // pour que chaque composant ait le mï¿½ï¿½me instrument sï¿½ï¿½lectionnï¿½ï¿½, utiliser cette mï¿½ï¿½thode
     // --- A REMPLIR POUR LES AUTRES PANELS ---
     private void setInstruSelec(int instrument){
         this.instruSelec = instrument;

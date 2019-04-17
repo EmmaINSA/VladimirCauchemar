@@ -55,9 +55,9 @@ public MainFourier(String instrument, double frequence) {
 
     JPanel graphPanel = new GraphPanel(plot,frequence);
 
-    MainFourier.VerticalPanel vertPanel = new MainFourier.VerticalPanel();
+    VerticalPanel vertPanel = new VerticalPanel();
 
-    MainFourier.HorizontalPanel horiPanel = new MainFourier.HorizontalPanel();
+    HorizontalPanel horiPanel = new HorizontalPanel();
 
     add(title, BorderLayout.NORTH);
     add(horiPanel, BorderLayout.SOUTH);

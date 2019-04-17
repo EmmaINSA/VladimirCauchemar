@@ -63,9 +63,9 @@ public MainPanel2(String instrument, double frequence, LinkedList<Integer> harmo
     title.setFont(new Font("Arial", Font.BOLD, 25));
     title.setHorizontalAlignment(JLabel.CENTER);
 
-    MainPanel2.VerticalPanel vertPanel = new MainPanel2.VerticalPanel();
+    VerticalPanel vertPanel = new VerticalPanel();
 
-    MainPanel2.HorizontalPanel horiPanel = new MainPanel2.HorizontalPanel();
+    HorizontalPanel horiPanel = new HorizontalPanel();
 
     add(title, BorderLayout.NORTH);
     add(horiPanel, BorderLayout.SOUTH);

@@ -59,9 +59,9 @@ public MainPanel(String instrument, double frequence) {
 
     JPanel graphPanel = new GraphPanel(plot,frequence);
 
-    MainPanel.VerticalPanel vertPanel = new MainPanel.VerticalPanel();
+    VerticalPanel vertPanel = new VerticalPanel();
 
-    MainPanel.HorizontalPanel horiPanel = new MainPanel.HorizontalPanel();
+    HorizontalPanel horiPanel = new HorizontalPanel();
 
     add(title, BorderLayout.NORTH);
     add(horiPanel, BorderLayout.SOUTH);
