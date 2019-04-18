@@ -22,3 +22,14 @@ Les étapes nécessaires au bon fonctionnement du projet sont les suivantes :
 
 NB : Si un message d'erreur tel que celui qui suit apparaît dans la console lors de l'exécution, ce n'est pas un problème pour notre programme.
 WARNING: Could not open/create prefs root node Software\JavaSoft\Prefs at root 0x80000002. Windows RegCreateKeyEx(...) returned error code 5.
+
+
+
+-----------
+UTILISATION
+-----------
+
+Afin de jouer un son avec votre clavier, vous pouvez utiliser les touches S,D,F puis J,K,L et M pour faire les notes de Do à Si.
+Les touches noires du piano sont représentées par les touches E,R puis I,O et P.
+Vous pouvez choisir la durée et la hauteur (octave) de la note jouée avec les sliders sur la droite de la fenêtre.
+Les options pour l'analyse du signal ou pour changer d'instrument se trouvent dans le menu supérieur.

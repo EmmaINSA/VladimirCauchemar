@@ -279,7 +279,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
         if (keyCode == KeyEvent.VK_S) {
 
             try {
-                // player.play("I["+Constants.STRINGS[instruSelec]+"] C"+octaveAct+duree);
+                player.play("I["+Constants.STRINGS[instruSelec]+"] C"+octaveAct+duree);
                 frequence =i.f[0+(Integer.parseInt(octaveAct)-2)*12];
                 if(afficherGraphe.isSelected()){
                     rafraichir(instrument, frequence, harmoniquesChoisies);
