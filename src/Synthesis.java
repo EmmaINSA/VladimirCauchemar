@@ -28,6 +28,7 @@ public class Synthesis extends JFrame{
 			setSize(width,height);
 			setTitle(title);
 			setLocation(90,500);
+			setResizable(false);
 
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		}

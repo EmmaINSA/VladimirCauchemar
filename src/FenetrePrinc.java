@@ -5,6 +5,7 @@
 //===========================================================================================================================
 
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -13,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -25,7 +27,7 @@ import org.jfugue.player.Player;
 
 public class FenetrePrinc extends JFrame implements ActionListener, ChangeListener, KeyListener{
 
-	Instrument i=new Instrument("Flute");
+	private Instrument i=new Instrument("Flute");
     protected int instruSelec=0, x=200, y=50, width = 960, height = 720, instruWidth, instruHeight;    // modifiables via options
     protected int dureeMin = 1, dureeMax = 10, dureeAct= 2;
     protected int octaveMin=2, octaveMax=7;
@@ -38,7 +40,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
     protected PanelInstrument panelInstru;
     protected JPanel mainPanel, panelOptions;
     protected JSlider sliderDuree, sliderOctave;
-    protected JLabel labelDuree, labelOctave;
+    protected JLabel labelDuree, labelOctave, labelSchema;
     private String duree=String.valueOf(dureeAct);
     protected JCheckBox afficherGraphe;
     protected LinkedList<Integer> harmoniquesChoisies;    
@@ -48,6 +50,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
     Player player = new Player();
     String instrument = Constants.STRINGS[instruSelec];
     double frequence=0;
+    private Image schema;
 
     public FenetrePrinc() {
         super("Simulateur d'instruments a vent");
@@ -81,7 +84,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
         this.mainPanel.add(panelOptions);
 
         // widgets
-        labelDuree = new JLabel("Duree d'une note (a def)");
+        labelDuree = new JLabel("Duree d'une note (*1/8 s)");
         labelDuree.setBounds((width-instruWidth)/2- 60, 10, width-instruWidth,50);
         panelOptions.add(labelDuree);
 
@@ -109,6 +112,10 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
         sliderOctave.setBounds(30,60 + height/10 + 20*2 + 50,width-instruWidth-60, height/10);
         panelOptions.add(sliderOctave);
 
+        labelSchema = new JLabel();
+        labelSchema.setBounds(0,instruHeight, width, height - instruHeight);
+        add(labelSchema);
+
         this.setInstruSelec(0);
 
         // barre de menu
@@ -123,6 +130,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
         u = new Unique();
     }
 
+    // initialisation de la barre de menu
     private void menuBar(){
 
         menuBar = new JMenuBar();
@@ -205,6 +213,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
         
     }
 
+    // appelee quand on interagit avec un element du menu
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
@@ -227,10 +236,6 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
 
         else if (source == this.itemOrgue){
             this.setInstruSelec(Constants.ORGUE);
-        }
-        
-        else if (source == this.afficherGraphe){
-            System.out.println("Affichage graphique active");
         }
 
         else if ((source == this.GroupeHarmonique[0])||(source == this.GroupeHarmonique[1])||(source == this.GroupeHarmonique[2])||
@@ -263,16 +268,11 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                 e1.printStackTrace();
             }
         }
-
-        else{
-            System.out.println("Pas d'action specifiee");
-        }
     }
-
 
     public void keyTyped(KeyEvent e) {}
 
-
+    // joue une note quand on appuie sur une touche du clavier reliee a une note
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
 
@@ -438,6 +438,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
 
     public void keyReleased(KeyEvent e) {}
 
+    // redimensionne les compostants de la fenetre quand on change de resolution
     private void setDim(int width, int height){
         if (this.width != width && this.height != height) {
             // fenetre et panels
@@ -454,14 +455,19 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
             sliderDuree.setBounds(30,60,width-instruWidth-60, height/10);
             labelOctave.setBounds((width-instruWidth)/2 - 60, 60 + height/10 + 20, width-instruWidth, 50);
             sliderOctave.setBounds(30,60 + height/10 + 20*2 + 50,width-instruWidth-60, height/10);
+            labelSchema.setBounds(0,instruHeight, width, height - instruHeight);
+            labelSchema.setIcon(new ImageIcon(schema.getScaledInstance(width/2, height-instruHeight, Image.SCALE_DEFAULT)));
+
             this.setBounds(x, y, width, height);
         }
     }
 
+    // actualise l'octave a jouer quand on la modifie avec le slider correspondant
     private void setOctave(int numOctave){
         octaveAct = String.valueOf(numOctave);
     }
 
+    // actualise la duree de la note a jouer
     private void setDuree(int dureeint){
         StringBuilder sb = new StringBuilder();
         for (int i=0; i< dureeint; i++){
@@ -470,9 +476,28 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
         duree = sb.toString();
     }
 
+    // actualise l'instrument selectionne
     private void setInstruSelec(int instrument){
         this.instruSelec = instrument;
         this.panelInstru.setInstruSelec(instrument);
+
+        // modele physique
+        if (instruSelec == Constants.FLUTEDEPAN || instruSelec == Constants.FLUTEABEC || instruSelec == Constants.ORGUE) {
+            try {
+                schema = ImageIO.read(new File("Files/semi ouvert.jpg"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            try {
+                schema = ImageIO.read(new File("Files/conique.jpg"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        labelSchema.setIcon(new ImageIcon(schema.getScaledInstance(width/2, height-instruHeight, Image.SCALE_DEFAULT)));
+
         this.repaint();
     }
 
@@ -519,7 +544,6 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                 LinkedList<Integer> harmoniquesParDefaut = new LinkedList<Integer>();
                 harmoniquesParDefaut.add(0);
                 u.refresh(instrument, frequence, harmoniquesParDefaut);
-                System.out.println("Vous pouvez choisir les harmoniques que vous souhaitez, la fondamentale etant affichee par defaut");
             }
             else 
                 u.refresh(instrument, frequence, harmoniques);

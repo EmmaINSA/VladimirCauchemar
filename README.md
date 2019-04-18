@@ -8,6 +8,8 @@ Objectif du projet :
 
 Modéliser simplement le comportement d'une onde sonore à travers un intrument à vent à l'aide d'une décomposition de Fourier du signal simplifié
 
+Réalisé par : TOUT Iyad, BREMARD Alexandre, ZENG Chenyang, NEISS Emma
+
 -------------
 CONFIGURATION
 -------------
@@ -31,5 +33,6 @@ UTILISATION
 
 Afin de jouer un son avec votre clavier, vous pouvez utiliser les touches S,D,F puis J,K,L et M pour faire les notes de Do à Si.
 Les touches noires du piano sont représentées par les touches E,R puis I,O et P.
-Vous pouvez choisir la durée et la hauteur (octave) de la note jouée avec les sliders sur la droite de la fenêtre.
-Les options pour l'analyse du signal ou pour changer d'instrument se trouvent dans le menu supérieur.
+Vous pouvez retrouver la correspondance des touches dans le fichier clavier.png (dans Files)
+Vous pouvez également choisir la durée et la hauteur (octave) de la note jouée avec les sliders sur la droite de la fenêtre.
+Les autres options (analyse du signal, changement d'instrument par exemple) se trouvent dans le menu supérieur.

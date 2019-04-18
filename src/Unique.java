@@ -30,6 +30,7 @@ public class Unique extends JFrame{
 			setSize(width,height);
 			setTitle(title);
 			setLocation(1130,500);
+			setResizable(false);
 
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		}

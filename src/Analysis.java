@@ -28,6 +28,7 @@ public class Analysis extends JFrame{
 			setSize(width,height);
 			setTitle(title);
 			setLocation(610,500);
+			setResizable(false);
 
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		}
