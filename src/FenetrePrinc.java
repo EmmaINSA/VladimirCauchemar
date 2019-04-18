@@ -167,6 +167,8 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
             menuHarmoniques.add(GroupeHarmonique[i]);
             GroupeHarmonique[i].addActionListener(this);
         }
+        GroupeHarmonique[0].setSelected(true);
+
             
         menuBar.add(menuHarmoniques);
 
@@ -277,7 +279,7 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
         if (keyCode == KeyEvent.VK_S) {
 
             try {
-                player.play("I["+Constants.STRINGS[instruSelec]+"] C"+octaveAct+duree);
+                // player.play("I["+Constants.STRINGS[instruSelec]+"] C"+octaveAct+duree);
                 frequence =i.f[0+(Integer.parseInt(octaveAct)-2)*12];
                 if(afficherGraphe.isSelected()){
                     rafraichir(instrument, frequence, harmoniquesChoisies);
@@ -431,8 +433,8 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
                 Logger.getLogger(FenetrePrinc.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
     }
-
 
     public void keyReleased(KeyEvent e) {}
 
