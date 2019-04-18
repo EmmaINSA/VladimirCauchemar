@@ -523,14 +523,14 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
         this.requestFocus();        // on perd le focus pour la fenetre après stateChanged -> le remet
     }
 
-    private void rendreVisible(){
+    private void rendreVisible(){   // graphiques
         s.setVisible(true);
         a.setVisible(true);
         u.setVisible(true);
         this.setVisible(true);
     }
 
-    private void rendreInvisible(){
+    private void rendreInvisible(){     // graphiques
         s.setVisible(false);
         a.setVisible(false);
         u.setVisible(false);
@@ -540,13 +540,14 @@ public class FenetrePrinc extends JFrame implements ActionListener, ChangeListen
     private void rafraichir(String instrument, double frequence, LinkedList<Integer> harmoniques){
         a.refresh(instrument, frequence);
         s.refresh(instrument, frequence);
-            if(harmoniques == null){
-                LinkedList<Integer> harmoniquesParDefaut = new LinkedList<Integer>();
-                harmoniquesParDefaut.add(0);
-                u.refresh(instrument, frequence, harmoniquesParDefaut);
-            }
-            else 
-                u.refresh(instrument, frequence, harmoniques);
+        if(harmoniques == null){
+            LinkedList<Integer> harmoniquesParDefaut = new LinkedList<Integer>();
+            harmoniquesParDefaut.add(0);
+            u.refresh(instrument, frequence, harmoniquesParDefaut);
+        }
+        else {
+            u.refresh(instrument, frequence, harmoniques);
+        }
     }
 
 }
