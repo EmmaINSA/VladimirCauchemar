@@ -35,3 +35,4 @@ Les touches noires du piano sont représentées par les touches E,R puis I,O et 
 Vous pouvez retrouver la correspondance des touches dans le fichier clavier.png (dans Files)
 Vous pouvez également choisir la durée et la hauteur (octave) de la note jouée avec les sliders sur la droite de la fenêtre.
 Les autres options (analyse du signal, changement d'instrument par exemple) se trouvent dans le menu supérieur.
+
