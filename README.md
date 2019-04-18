@@ -1,9 +1,9 @@
 # VladimirCauchemar
 
-Projet d'info ASINSA2
+## Projet d'info ASINSA2
 =====================
 
-Objectif du projet : 
+### Objectif du projet : 
 
 Modéliser simplement le comportement d'une onde sonore à travers un intrument à vent à l'aide d'une décomposition de Fourier du signal simplifié
 
@@ -21,8 +21,8 @@ Les étapes nécessaires au bon fonctionnement du projet sont les suivantes :
 	- compilez et exécutez MainPrinc.java
 	
 
-NB : Si un message d'erreur tel que celui qui suit apparaît dans la console lors de l'exécution, ce n'est pas un problème pour notre programme.
-WARNING: Could not open/create prefs root node Software\JavaSoft\Prefs at root 0x80000002. Windows RegCreateKeyEx(...) returned error code 5.
+**NB : Si un message d'erreur tel que celui qui suit apparaît dans la console lors de l'exécution, ce n'est pas un problème pour notre programme.**
+`WARNING: Could not open/create prefs root node Software\JavaSoft\Prefs at root 0x80000002. Windows RegCreateKeyEx(...) returned error code 5.`
 
 
 
